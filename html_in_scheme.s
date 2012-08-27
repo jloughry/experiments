@@ -1,5 +1,10 @@
 ; This is a conceptual model of generating HTML in Scheme.
 
+; This is an idea I had years ago.  I think it has been invented many times, but my
+; improvement is to do it without requiring quotation marks for the strings.  It's
+; easy in CL using "rest" but let's see if we can make it work in Scheme with macros
+; instead...
+
 (html
 	(head
 		(meta (http-equiv (Content-Type content=text/html; charset=utf-8)))
