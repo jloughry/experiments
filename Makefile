@@ -1,6 +1,6 @@
 target = html_in_scheme
 
-source = $(target).s
+source = $(target).scm
 
 vi:
 	vi $(source)
