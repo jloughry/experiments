@@ -1,16 +1,13 @@
 target = html_in_scheme
 
 source = $(target).scm
-documentation = README.md
 
-#
-# Note: make requires that we set the value of a variable OUTSIDE any rules.
-#
-
-timestamp = `date +%Y%m%d.%H%M`
+include ../Makefiles/git1.mk
 
 vi:
 	vi $(source)
+
+include ../Makefiles/git2.mk
 
 notes:
 	(cd ../notes && make vi)
@@ -20,18 +17,6 @@ quotes:
 
 bibtex:
 	(cd ../bibtex && make vi)
-
-commit:
-	git add .
-	git commit -am "commit from Makefile $(timestamp)"
-	make sync
-
-sync:
-	git pull --rebase
-	git push
-
-readme:
-	vi $(documentation)
 
 spell:
 	aspell --lang=en check $(documentation)
