@@ -2,25 +2,17 @@ target = html_in_scheme
 
 source = $(target).scm
 
-include ../Makefiles/git1.mk
+all:
+	@echo "There is nothing to build here."
 
 vi:
 	vi $(source)
 
-include ../Makefiles/git2.mk
-
-notes:
-	(cd ../notes && make vi)
-
-quotes:
-	(cd ../notes && make quotes)
-
-bibtex:
-	(cd ../bibtex && make vi)
-
 spell:
-	aspell --lang=en check $(documentation)
+	aspell --lang=en check README.md
 
 clean:
-	rm -f $(documentation).bak
+	@echo "\"make clean\" doesn't do anything here"
+
+include common.mk
 
