@@ -1,0 +1,1 @@
+improve README in make_behaviour_on_symlinks
