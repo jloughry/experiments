@@ -9,6 +9,9 @@ in [FreeBSD](http://svnweb.freebsd.org/base/head/sys/modules/syscons/dragon/Make
 
 Every Makefile include `common.mk` at the end, like this:
 
+    .
+    .
+    .
     include common.mk
 
 In turn, there is a symlink in the current directory that points `common.mk` to the real
