@@ -1,5 +1,10 @@
-target = hellow_world
+target = hello_world
 source = $(target).c
+
+all:: $(target)
+
+clean::
+	rm -f $(target)
 
 $(target): $(source) Makefile
 	cc -Wall -Werror -o $(target) $(source)
@@ -7,9 +12,6 @@ $(target): $(source) Makefile
 
 test:
 	./$(target)
-
-clean:
-	rm -f $(target)
 
 include common.mk
 

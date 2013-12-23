@@ -5,7 +5,6 @@
 # to look through the symlink to do it.
 #
 
-can_I_define_variables_here = YES
-
 Makefile: common.mk
+	touch Makefile
 

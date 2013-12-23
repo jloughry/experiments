@@ -1,0 +1,1 @@
+Makefile-with-symlinks experiment is working now (see the README in that directory)
