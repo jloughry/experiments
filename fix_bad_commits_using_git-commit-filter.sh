@@ -7,8 +7,10 @@
 # history of those changes, so reset them to the correct identity so they get
 # credited properly in `git blame` from now on.
 #
+# Modified from Chapter 6 in Scott Chacon, "Pro Git" (New York: Apress, 2009).
+#
 
-git filter-branch --commit-filter '
+git filter-branch -f --commit-filter '
 	if [ "$GIT_AUTHOR_EMAIL" = "rjl@applied-math.org" ]
 	then
 		GIT_AUTHOR_NAME="jloughry"
