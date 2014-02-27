@@ -11,7 +11,7 @@ int main(int argc, char ** argv)
 
 	switch (argc) {
 		case 2:
-			assert(isdigit((int)argv[1][0]) || (argv[1][0] == '-' && isdigit((int)argv[1][1])));
+			assert(isdigit((int)argv[1][0]) || ('-' == argv[1][0] && isdigit((int)argv[1][1])));
 			n = atoi(argv[1]);
 			printf ("The command line arguments were \"%s\" and %d\n", programme_name, n);
 			break;

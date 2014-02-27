@@ -1,1 +1,1 @@
-use -Werror with -Wall and -Wunreachable-code flags
+automatic test cases are now working in experiments/google_docs
