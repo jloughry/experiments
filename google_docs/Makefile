@@ -2,7 +2,7 @@ target = skeleton
 executable = $(target).exe
 
 CC=gcc
-CC_FLAGS = -Wall -Wunreachable-code
+CC_FLAGS = -Wall -Wunreachable-code -Werror
 DEBUG_FLAGS = -DDEBUG
 PRODUCTION_FLAGS = -DNDEBUG
 editor = vi
@@ -35,7 +35,7 @@ allclean: clean
 
 production: $(all_sources) Makefile
 	make allclean
-	$(CC) $(CFLAGS) $(PRODUCTION_FLAGS) -c $(c_sources)
+	$(CC) $(CC_FLAGS) $(PRODUCTION_FLAGS) -c $(c_sources)
 	make $(executable)
 	strip $(executable)
 
