@@ -1,1 +1,2 @@
-automatic test cases are now working in experiments/google_docs
+Sort the list of all /usr/dict/words that do not already exist in the DNS.
+From https://news.ycombinator.com/item?id=7365998
