@@ -37,3 +37,7 @@ expression. One way is to use a mask:
     % paste mask.txt original.txt | sort | cut -f 2
     % rm mask.txt
 
+Eliminating the temporary file:
+
+    % sed -e "s/./x/g" < list.txt | paste - list.txt | sort | cut -f 2
+
