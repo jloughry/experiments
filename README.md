@@ -41,3 +41,18 @@ Eliminating the temporary file:
 
     % sed -e "s/./x/g" < list.txt | paste - list.txt | sort | cut -f 2
 
+We can eliminate the `paste` by using `sed`'s hold buffer, but at the cost of another
+regexp to get rid of the spurious newline inserted by `sed`:
+
+    % sed -e "h;s/./x/g;G;s/\n/\t/" list.txt | sort | cut -f2
+
+*How it works: **h** copies the pattern buffer into the hold space, then `s/./x/g` is run
+on the pattern buffer to build a mask. Commands are separated by semicolons. **G** appends
+the hold space to the pattern space (with a newline between), and `s/\n/\t/` changes that
+newline to a tab which is the delimiter expected by `cut` later on. Lines that look like
+`xxxx word` sort by the length of the mask, then the mask is thrown away by `cut`.
+
+The line can be shortened slightly removing spaces that are not strictly needed:
+
+    % sed -e"h;s/./x/g;G;s/\n/\t/" list.txt|sort|cut -f2
+
