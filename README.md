@@ -56,3 +56,14 @@ The line can be shortened slightly removing spaces that are not strictly needed:
 
     % sed -e"h;s/./x/g;G;s/\n/\t/" list.txt|sort|cut -f2
 
+`irish_dance`
+-------------
+
+To extract a list of events from Google Calendar, use the command line tools. Once the
+[`googlecl`](https://code.google.com/p/googlecl) package has been installed, do this:
+
+
+````
+$ google calendar list --date 2013-08-26,2014-03-25 --cal "Miranda's Things"
+````
+

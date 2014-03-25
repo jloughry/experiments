@@ -1,0 +1,68 @@
+Irish Dance - Denver Studio			Aug 27 18:30 - Aug 27 20:30		2	hr
+dance class in Boulder				Sep 02 17:15 - Sep 02 19:45		2.5	hr
+Irish Dance - Denver Studio			Sep 03 18:30 - Sep 03 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Sep 05 19:00 - Sep 05 20:30		1.5	hr
+Irish Dance - Denver Studio			Sep 10 18:30 - Sep 10 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Sep 12 19:00 - Sep 12 20:30		1.5	hr
+Irish Dance - Denver Studio			Sep 17 18:30 - Sep 17 20:30		2	hr
+team practice in Boulder			Sep 22 11:00 - Sep 22 14:30		3.5	hr
+Oireachtas Teams				Sep 22 16:00 - Sep 22 17:30		1.5	hr
+Irish Dance - Denver Studio			Sep 24 18:30 - Sep 24 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Sep 26 19:00 - Sep 26 20:30		1.5	hr
+Oireachtas Teams				Sep 29 16:00 - Sep 29 17:30		1.5	hr
+Irish Dance - Denver Studio			Oct 01 18:30 - Oct 01 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Oct 03 19:00 - Oct 03 20:30		1.5	hr
+Oireachtas Teams				Oct 06 16:00 - Oct 06 17:30		1.5	hr
+Irish Dance - Denver Studio			Oct 08 18:30 - Oct 08 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Oct 10 19:00 - Oct 10 20:30		1.5	hr
+Oireachtas Teams				Oct 13 16:00 - Oct 13 17:30		1.5	hr
+Irish Dance Highlands Ranch Studio		Oct 17 19:00 - Oct 17 20:30		1.5	hr
+Oireachtas Teams				Oct 20 16:00 - Oct 20 17:30		1.5	hr
+Irish Dance - Denver Studio			Oct 22 18:30 - Oct 22 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Oct 24 19:00 - Oct 24 20:30		1.5	hr
+Oireachtas Teams				Oct 27 16:00 - Oct 27 17:30		1.5	hr
+Irish Dance - Denver Studio			Oct 29 18:30 - Oct 29 20:30		2	hr
+Oireachtas Teams				Nov 02 16:00 - Nov 02 17:30		1.5	hr
+Irish Dance - Denver Studio			Nov 05 18:30 - Nov 05 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Nov 07 19:00 - Nov 07 20:30		1.5	hr
+Oireachtas Teams				Nov 10 16:00 - Nov 10 17:30		1.5	hr
+Irish Dance - Denver Studio			Nov 12 18:30 - Nov 12 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Nov 14 19:00 - Nov 14 20:30		1.5	hr
+Oireachtas Teams				Nov 17 16:00 - Nov 17 17:30		1.5	hr
+Irish Dance - Denver Studio			Nov 19 18:30 - Nov 19 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Nov 21 19:00 - Nov 21 20:30		1.5	hr
+Irish Dance -NEW Denver Studio		Dec 03 18:30 - Dec 03 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Dec 05 19:00 - Dec 05 20:30		1.5	hr
+Irish Dance -NEW Denver Studio		Dec 10 18:30 - Dec 10 20:30		2	hr
+Miranda teaching Irish Dance			Dec 12 18:00 - Dec 12 19:00		1	hr
+Irish Dance Highlands Ranch Studio		Dec 12 19:00 - Dec 12 20:30		1.5	hr
+Irish Dance -NEW Denver Studio		Dec 17 18:30 - Dec 17 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Dec 19 19:00 - Dec 19 20:30		1.5	hr
+Irish Dance -NEW Denver Studio		Jan 07 18:30 - Jan 07 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Jan 09 19:00 - Jan 09 20:30		1.5	hr
+Irish Dance -NEW Denver Studio		Jan 14 18:30 - Jan 14 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Jan 16 19:00 - Jan 16 20:30		1.5	hr
+Irish Dance  Boulder				Jan 20 18:00 - Jan 20 19:45		1.75	hr
+Irish Dance -NEW Denver Studio		Jan 21 18:30 - Jan 21 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Jan 23 19:00 - Jan 23 20:30		1.5	hr
+Irish Dance -NEW Denver Studio		Jan 28 18:30 - Jan 28 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Jan 30 19:00 - Jan 30 20:30		1.5	hr
+Tech Class in Boulder				Jan 31 16:30 - Jan 31 18:30		2	hr
+Irish Dance -NEW Denver Studio		Feb 04 18:30 - Feb 04 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Feb 06 19:00 - Feb 06 20:30		1.5	hr
+Irish Dance -NEW Denver Studio		Feb 11 18:30 - Feb 11 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Feb 13 19:00 - Feb 13 20:30		1.5	hr
+Tech Class Boulder				Feb 14 16:30 - Feb 14 17:30		1	hr
+Boulder Class					Feb 17 18:00 - Feb 17 19:45		1.75	hr
+Irish Dance - Denver Studio			Feb 18 18:30 - Feb 18 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Feb 20 19:00 - Feb 20 20:30		1.5	hr
+Irish Dance - Denver Studio			Feb 25 18:30 - Feb 25 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Feb 27 19:00 - Feb 27 20:30		1.5	hr
+Irish Dance - Denver Studio			Mar 04 18:30 - Mar 04 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Mar 06 19:00 - Mar 06 20:30		1.5	hr
+Irish Dance Highlands Ranch Studio		Mar 13 19:00 - Mar 13 20:30		1.5	hr
+Irish Dance - Denver Studio			Mar 18 18:30 - Mar 18 20:30		2	hr
+Irish Dance Highlands Ranch Studio		Mar 20 19:00 - Mar 20 20:30		1.5	hr
+Boulder Irish Dance				Mar 24 18:00 - Mar 24 19:45		1.75	hr
+
+Total: 66 events on 64 days, 114.75 hours
