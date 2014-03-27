@@ -1,4 +1,4 @@
-target = bst
+target = apple_stock_prices
 
 executable = $(target).exe
 
@@ -26,7 +26,7 @@ vi:
 	$(editor) $(target).c
 
 clean::
-	rm -f $(temporary_files)
+	rm -f $(temporary_files) consolidated_bibtex_file.bib
 
 allclean: clean
 	rm -f $(executable)
