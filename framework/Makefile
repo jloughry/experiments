@@ -8,7 +8,7 @@ DEBUG_FLAGS = -DDEBUG
 PRODUCTION_FLAGS = -DNDEBUG
 editor = vi
 
-temporary_files = 
+temporary_files = $(executable).stackdump consolidated_bibtex_file.bib
 
 all:: $(executable)
 
@@ -26,7 +26,7 @@ vi:
 	$(editor) $(target).c
 
 clean::
-	rm -f $(temporary_files) consolidated_bibtex_file.bib
+	rm -f $(temporary_files)
 
 allclean: clean
 	rm -f $(executable)

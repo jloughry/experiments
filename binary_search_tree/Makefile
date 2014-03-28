@@ -8,7 +8,7 @@ DEBUG_FLAGS = -DDEBUG
 PRODUCTION_FLAGS = -DNDEBUG
 editor = vi
 
-temporary_files = 
+temporary_files = $(executable).stackdump consolidated_bibtex_file.bib
 
 all:: $(executable)
 
