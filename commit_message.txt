@@ -1,1 +1,1 @@
-binary_search_tree is working; improvements to Makefile in framework directory; cleanup here
+OUSS logo in vector formats (converted with Inkscape)
