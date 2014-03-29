@@ -67,3 +67,12 @@ To extract a list of events from Google Calendar, use the command line tools. On
 $ google calendar list --date 2013-08-26,2014-03-25 --cal "Miranda's Things"
 ````
 
+OUSS_logo
+---------
+
+The logo of the [Oxford University Scientific Society](http://users.ox.ac.uk/~science/),
+founded in 1882.
+
+The colour is Oxford Blue, Pantone 282, RGB $(0,33,71)$ or in hexadecimal, \verb,#002147,
+according to [this reference](http://www.ox.ac.uk/branding_toolkit/the_brand_colours/).
+
