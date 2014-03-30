@@ -4,8 +4,7 @@ executable = $(target).exe
 
 CC=gcc
 CFLAGS = -Wall -Wunreachable-code -Werror
-DEBUG_FLAGS = -DDEBUG
-PRODUCTION_FLAGS = -DNDEBUG
+DEBUG_FLAGS = # -DDEBUG
 editor = vi
 
 temporary_files = $(executable).stackdump consolidated_bibtex_file.bib
