@@ -1,1 +1,1 @@
-added insert and inorder_traversal to binary_search_tree
+stack is working
