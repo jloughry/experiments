@@ -1,1 +1,1 @@
-implement a queue using a pair of stacks
+sort/ contains a quicksort implementation (not the in-place version of quicksort)
