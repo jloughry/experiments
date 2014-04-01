@@ -76,3 +76,27 @@ founded in 1882.
 The colour is Oxford Blue, Pantone 282, RGB $(0,33,71)$ or in hexadecimal, \verb,#002147,
 according to [this reference](http://www.ox.ac.uk/branding_toolkit/the_brand_colours/).
 
+C_kata
+------
+
+This is a series of *kata* type exercises in C. So far, the working ones are:
+
+- [`binary_search_tree`](https://github.com/jloughry/experiments/tree/master/C_kata/binary_search_tree/)
+*an implementation of a binary search tree*
+- [`framework`](https://github.com/jloughry/experiments/tree/master/C_kata/framework/)
+*copy this directory to begin writing a new C programme quickly*
+- [`google_docs`](https://github.com/jloughry/experiments/tree/master/C_kata/google_docs/)
+*an experimental implementation of automatically generated unit tests*
+- [`interviewcake.com`](https://github.com/jloughry/experiments/tree/master/C_kata/interviewcake.com/)
+*the &ldquo;Apple Stock Prices&rdquo; problem from [interviewcake.com](http://interviewcake.com).
+- [`sort`](https://github.com/jloughry/experiments/tree/master/C_kata/sort/)
+*a functional version of quicksort using linked lists&mdash;not the in-place variant*
+- [`stack`](https://github.com/jloughry/experiments/tree/master/C_kata/stack/)
+*an extensible stack implementation using linked lists* (also implements a queue
+using a pair of stacks, from [interviewkae.com](http://interviewcake.com)).
+
+Not working yet:
+
+- [`hash`](https://github.com/jloughry/experiments/tree/master/C_kata/hash/)
+*implement a hash table using arrays*
+

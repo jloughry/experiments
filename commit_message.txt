@@ -1,1 +1,1 @@
-sort/ contains a quicksort implementation (not the in-place version of quicksort)
+move katas under new directory C_kata; update README
