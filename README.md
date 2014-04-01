@@ -93,7 +93,7 @@ This is a series of *kata* type exercises in C. So far, the working ones are:
 *a functional version of quicksort using linked lists&mdash;not the in-place variant*
 - [`stack`](https://github.com/jloughry/experiments/tree/master/C_kata/stack/)
 *an extensible stack implementation using linked lists* (also implements a queue
-using a pair of stacks, from [interviewkae.com](http://interviewcake.com)).
+using a pair of stacks, the second demo problem from [interviewcake.com](http://interviewcake.com)).
 
 Not working yet:
 

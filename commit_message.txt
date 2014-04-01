@@ -1,1 +1,1 @@
-move katas under new directory C_kata; update README
+fix typo in interviewcake.com
