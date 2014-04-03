@@ -87,6 +87,8 @@ This is a series of *kata* type exercises in C. So far, the working ones are:
 *copy this directory to begin writing a new C programme quickly*
 - [`google_docs`](https://github.com/jloughry/experiments/tree/master/C_kata/google_docs/)
 *an experimental implementation of automatically generated unit tests*
+- [`hash`](https://github.com/jloughry/experiments/tree/master/C_kata/hash/)
+*implement a hash table using arrays*
 - [`interviewcake.com`](https://github.com/jloughry/experiments/tree/master/C_kata/interviewcake.com/)
 *the &ldquo;Apple Stock Prices&rdquo; problem from [interviewcake.com](http://interviewcake.com).
 - [`sort`](https://github.com/jloughry/experiments/tree/master/C_kata/sort/)
@@ -95,8 +97,18 @@ This is a series of *kata* type exercises in C. So far, the working ones are:
 *an extensible stack implementation using linked lists* (also implements a queue
 using a pair of stacks, the second demo problem from [interviewcake.com](http://interviewcake.com)).
 
-Not working yet:
+All of these are working and reasonably complete; all memory allocated is freed, and
+no global variables are used. The code is fairly functional in design. Things are mostly
+dynamically allocated so that unlimited numbers of them can be created, used concurrently,
+and destroyed when no longer needed. Thread safety is not considered. In the `hash` example,
+`assert()` is used freely, but hasn't been used much elsewhere (it's an example of style).
 
-- [`hash`](https://github.com/jloughry/experiments/tree/master/C_kata/hash/)
-*implement a hash table using arrays*
+The style used throughout, with the exception of `assert()`, is pedantic. Cleverness is
+eschewed in favour of clarity and reliability.
+
+TODO
+----
+
+1. Improve commenting in the C_kata examples.
+
 
