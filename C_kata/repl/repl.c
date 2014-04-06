@@ -42,31 +42,45 @@ void evaluate (char * line) {
 	p = line;
 	while (*p) {
 		int n = 0;
+		char * beginning_of_identifier = NULL;
+		char * new_identifier = NULL;
+		size_t length_of_identifier = 0;
 
-		switch(*p) {
-			case ' ': case '\t': case '\n': /* skip whitespace */
-				p++;
-				break;
-			case '0': case '1': case '2': case '3': case '4':
-			case '5': case '6': case '7': case '8': case '9':
-				n = *p - '0';
-				p++;
-				while (*p && *p >= '0' && *p <= '9') {
-					n = 10 * n + *p - '0';
-					p++;
-				}
-				fprintf(stderr, "found a number: n = %d\n", n);
-				break;
-			case '(':
-				while (*p && *p != ')') {
-					p++;
-				}
-				fprintf(stderr, "found an s-expression\n");
-				break;
-			default:
-				break;
+		if (isspace((unsigned)*p)) {
+			p++;	/* skip whitespace */
 		}
-		p++;
+		else if (isdigit((unsigned)*p)) {
+			n = *p - '0';
+			p++;
+			while (*p && isdigit((unsigned)*p)) {
+				n = 10 * n + *p - '0';
+				p++;
+			}
+			fprintf(stderr, "found a number: n = %d\n", n);
+		}
+		else if (isalnum((unsigned)*p)) {
+			beginning_of_identifier = p;
+			while (*p && isalnum((unsigned)*p)) {
+				p++;
+			}
+			length_of_identifier = p - beginning_of_identifier;
+			assert(new_identifier = malloc(length_of_identifier + 1));
+			strncpy(new_identifier, beginning_of_identifier, length_of_identifier);
+			new_identifier[length_of_identifier] = '\0';
+			fprintf(stderr, "found an identifier: \"%s\"\n", new_identifier);
+		}
+		else if ('(' == *p) {	/* TODO: add the concept of nesting depth */
+			fprintf(stderr, "found the beginning of an s-expression\n");
+			p++;
+		}
+		else if (')' == *p) {
+			fprintf(stderr, "found the end of an s-expression\n");
+			p++;
+		}
+		else {
+			fprintf(stderr, "skipping...\n");
+			p++;
+		}
 	}
 }
 
