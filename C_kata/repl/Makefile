@@ -1,4 +1,4 @@
-target = framework
+target = repl
 
 executable = $(target).exe
 
