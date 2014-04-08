@@ -19,6 +19,11 @@ all:: $(executable)
 $(executable): $(target).c Makefile
 	$(CC) -o $@ $(CFLAGS) $(DEBUG_FLAGS) $<
 
+#
+# 101 is the largest known prime of the form 10^n + 1. Some
+# of these test cases take a long time to run.
+#
+
 test: $(executable)
 	./$< 1
 	./$< 2
@@ -43,6 +48,7 @@ test: $(executable)
 	./$< 100000000000001
 	./$< 1000000000000001
 	./$< 10000000000000001
+	./$< 100000000000000001
 
 common.mk:
 	ln -s /home/rjl/Documents/thesis/github/Makefiles/common.mk

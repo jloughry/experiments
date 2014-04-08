@@ -1,1 +1,1 @@
-new C katas: rdp and prime.
+added more test cases: e.g., 101 is the largest known prime of the form 10^n + 1

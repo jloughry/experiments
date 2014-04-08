@@ -15,7 +15,7 @@ int main (int argc, char ** argv) {
 	int rc = EXIT_SUCCESS;
 	long long factor = 0;
 	long long limit = 0;
-	int is_prime = 1;
+	int prime = 1;
 
 	switch(argc) {
 		case 2:
@@ -32,8 +32,8 @@ int main (int argc, char ** argv) {
 	assert(n >= 0);
 
 	if (1 == n) {
-		printf("1 is not prime");
-		is_prime = 0;
+		printf("is not prime");
+		prime = 0;
 	}
 	else {
 		factor = 2;
@@ -41,7 +41,7 @@ int main (int argc, char ** argv) {
 		while (n > 1 && factor < limit) {
 			if (n % factor == 0) {
 				if (factor < n) {
-					is_prime = 0;
+					prime = 0;
 				}
 				printf("%lld ", factor);
 				n /= factor;
@@ -52,7 +52,7 @@ int main (int argc, char ** argv) {
 			}
 		}
 	}
-	if (is_prime) {
+	if (prime) {
 		printf("%lld is prime", n);
 	}
 	printf("\n");

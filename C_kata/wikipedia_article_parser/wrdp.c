@@ -28,6 +28,7 @@ factor =
 	ident
 	| number
 	| "(" expression ")" .
+
 */
 
 #include <assert.h>
@@ -35,10 +36,10 @@ factor =
 #include <stdlib.h>
 #include <string.h>
 
-typedef enum {
-	ident, number, lparen, rparen, times, slash, plus, minus, eql, neq,
-	lss, leq, gtr, geq, callsym, beginsym, semicolon, endsym, ifsym, whilesym,
-	becomes, thensym, dosym, constsym, comma, varsym, procsym, period, oddsym,
+typedef enum { ident, number, lparen, rparen, times, slash, plus, minus,
+	eql, neq, lss, leq, gtr, geq, callsym, beginsym, semicolon, endsym,
+	ifsym, whilesym, becomes, thensym, dosym, constsym, comma, varsym,
+	procsym, period, oddsym
 } Symbol;
  
 Symbol sym;	/* global variable */
