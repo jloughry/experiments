@@ -39,6 +39,7 @@ void read (char * line) {
 void evaluate (char * line) {
 	char * p = NULL;
 
+	fprintf(stderr, "in evaluate() at %p: '%c'\n", line, *line);
 	p = line;
 	while (*p) {
 		int n = 0;
@@ -69,9 +70,11 @@ void evaluate (char * line) {
 			new_identifier[length_of_identifier] = '\0';
 			fprintf(stderr, "found an identifier: \"%s\"\n", new_identifier);
 		}
-		else if ('(' == *p) {	/* TODO: add the concept of nesting depth */
-			fprintf(stderr, "found the beginning of an s-expression\n");
+		else if ('(' == *p) {
+			fprintf(stderr, "found the beginning of an s-expression at %p\n", p);
 			p++;
+			fprintf(stderr, "calling evaluate() at %p\n", p);
+			evaluate(p);
 		}
 		else if (')' == *p) {
 			fprintf(stderr, "found the end of an s-expression\n");

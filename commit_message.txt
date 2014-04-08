@@ -1,1 +1,1 @@
-in C_kata/repl/ playing with the concept of nesting depth in s-exprs
+new C katas: rdp and prime.
