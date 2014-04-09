@@ -36,11 +36,13 @@ factor =
 #include <stdlib.h>
 #include <string.h>
 
-typedef enum { ident, number, lparen, rparen, times, slash, plus, minus,
+enum symbols { ident, number, lparen, rparen, times, slash, plus, minus,
 	eql, neq, lss, leq, gtr, geq, callsym, beginsym, semicolon, endsym,
 	ifsym, whilesym, becomes, thensym, dosym, constsym, comma, varsym,
 	procsym, period, oddsym
-} Symbol;
+};
+
+typedef enum symbols Symbol;
  
 Symbol sym;	/* global variable */
 
@@ -49,14 +51,17 @@ void error (const char * message);
 void expression (void);
 
 void getsym (void) {
-	sym = ident;
+	static int i = 0;
+	Symbol symbol_list[] = { ident, becomes, number, period };
+	
+	sym = symbol_list[i++];
 }
 
 void error (const char * message) {
 	fprintf (stderr, "Error: %s\n", message);
 }
  
-int accept(Symbol s) {
+int accept (Symbol s) {
 	if (sym == s) {
 		getsym();
 		return 1;
@@ -64,7 +69,7 @@ int accept(Symbol s) {
 	return 0;
 }
  
-int expect(Symbol s) {
+int expect (Symbol s) {
 	if (accept(s)) {
 		return 1;
 	}
@@ -72,7 +77,7 @@ int expect(Symbol s) {
 	return 0;
 }
  
-void factor(void) {
+void factor (void) {
 	if (accept(ident)) {
 		;
 	}
@@ -89,7 +94,7 @@ void factor(void) {
 	}
 }
  
-void term(void) {
+void term (void) {
 	factor();
 	while (sym == times || sym == slash) {
 		getsym();
@@ -97,7 +102,7 @@ void term(void) {
 	}
 }
  
-void expression(void) {
+void expression (void) {
 	if (sym == plus || sym == minus) {
 		getsym();
 	}
@@ -108,7 +113,7 @@ void expression(void) {
 	}
 }
  
-void condition(void) {
+void condition (void) {
 	if (accept(oddsym)) {
 		expression();
 	}
@@ -125,7 +130,7 @@ void condition(void) {
 	}
 }
  
-void statement(void) {
+void statement (void) {
 	if (accept(ident)) {
 		expect(becomes);
 		expression();
@@ -155,7 +160,7 @@ void statement(void) {
 	}
 }
  
-void block(void) {
+void block (void) {
 	if (accept(constsym)) {
 		do {
 			expect(ident);
@@ -179,9 +184,15 @@ void block(void) {
 	statement();
 }
  
-void program(void) {
+void program (void) {
 	getsym();
 	block();
 	expect(period);
+}
+
+int main (void) {
+	program();
+
+	return EXIT_SUCCESS;
 }
 
