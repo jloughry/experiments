@@ -1,33 +1,72 @@
 /*
 
-This is the grammar from the Wikipedia article on "Recursive Descent Parser".
+program -> form*
 
-program = block "." .
- 
-block =
-	["const" ident "=" number {"," ident "=" number} ";"]
-	["var" ident {"," ident} ";"]
-	{"procedure" ident ";" block ";"} statement .
- 
-statement =
-	ident ":=" expression
-	| "call" ident
-	| "begin" statement ";" {statement ";"} "end"
-	| "if" condition "then" statement
-	| "while" condition "do" statement .
- 
-condition =
-	"odd" expression
-	| expression ("="|"#"|"<"|"<="|">"|">=") expression .
- 
-expression = ["+"|"-"] term {("+"|"-") term} .
- 
-term = factor {("*"|"/") factor} .
- 
-factor =
-	ident
-	| number
-	| "(" expression ")" .
+form -> definition | expression
+
+definition -> variable_definition | <syntax_definition> | (begin <definition>*)
+	| (let-syntax (<syntax_binding>*) <definition>*)
+	| (letrec-syntax (<syntax_binding>*) <definition>*)
+	| <derived_definition>
+
+<variable_definition> -> (define <variable> <expression>)
+	| (define (<variable> <variable>*) <body>)
+	| (define (<variable> <variable>* . <variable>) <body>)
+
+<variable> -> <identifier>
+
+<body> -> <definition>* <expression>+
+
+<syntax_definition> -> (define-syntax <keyword> <transformer_expression>)
+
+<keyword> -> <identifier>
+
+<syntax binding> -> (<keyword> <transformer_expression>)
+
+<expression> -> <constant> | <variable> | (quote <datum>) | ' <datum>
+	| (lambda <formals> <body>)
+	| (if <expression> <expression> <expression>) | (if <expression> <expression>)
+	| (set! <variable> <expression>)
+	| <application>
+	| (let-syntax (<syntax_binding>*) <expression>+)
+	| (letrec-syntax (<syntax_binding>*) <expression>+)
+	| <derived expression>
+
+<constant> -> <boolean> | <number> | <character> | <string>
+
+<formals> -> <variable> | (<variable>*) | (<variable>+ . <variable>)
+
+<application> -> (<expression> <expression>*)
+
+<identifier> -> <initial> <subsequent>* | + | - | ...
+
+<initial> -> <letter> | ! | $ | % | & | * | / | : | < | = | > | ? | ~ | _ | ^
+
+<subsequent> -> <initial> | <digit> | . | + | -
+
+<letter> -> {A-Z}
+
+<digit> -> {0-9}
+
+<datum> -> <boolean> | <number> | <character> | <string> | <symbol> | <list> | <vector>
+
+<boolean> -> #t | #f
+<number> -> <num_2> | <num_8> | <num_10> | <num_16>
+
+<character> -> #\ <any character> | #\newline | #\space
+
+<string> -> " <string_character>* "
+
+<string_character> -> \" | \\ | <any character other than " or \>
+
+<symbol> -> <identifier>
+
+<list> -> (<datum>*) | (<datum>+ . <datum>) | <abbreviation>
+
+<abbreviation> -> ' <datum> | ` <datum> | , <datum> | ,@ <datum>
+
+<vector> -> #(<datum>*)
+
 
 */
 
