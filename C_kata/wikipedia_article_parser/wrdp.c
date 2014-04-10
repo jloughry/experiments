@@ -52,7 +52,7 @@ void expression (void);
 
 void getsym (void) {
 	static int i = 0;
-	Symbol symbol_list[] = { ident, becomes, number, period };
+	Symbol symbol_list[] = { varsym, ident, comma, semicolon, ident, becomes, number, semicolon, period };
 	
 	sym = symbol_list[i++];
 }

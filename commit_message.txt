@@ -1,2 +1,1 @@
-added full Scheme grammar to rdp
-(not implemented yet),
+rdp is now simpler, heading in the direction of being an interpreter for a subset of Scheme
