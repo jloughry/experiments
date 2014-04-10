@@ -8,6 +8,8 @@ DEBUG_FLAGS = -DDEBUG
 PRODUCTION_FLAGS = -DNDEBUG
 editor = vi
 
+testfile = length.scm
+
 temporary_files = $(executable).stackdump consolidated_bibtex_file.bib
 
 all:: $(executable)
@@ -20,7 +22,7 @@ $(executable): $(target).c Makefile
 	$(CC) -o $@ $(CFLAGS) $(DEBUG_FLAGS) $<
 
 test: $(executable)
-	./$<
+	./$< $(testfile)
 
 common.mk:
 	ln -s /home/rjl/Documents/thesis/github/Makefiles/common.mk
