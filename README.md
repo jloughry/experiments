@@ -91,6 +91,10 @@ This is a series of *kata* type exercises in C. So far, the working ones are:
 *implement a hash table using arrays*
 - [`interviewcake.com`](https://github.com/jloughry/experiments/tree/master/C_kata/interviewcake.com/)
 *the &ldquo;Apple Stock Prices&rdquo; problem from [interviewcake.com](http://interviewcake.com).
+- [`rdp`](https://github.com/jloughry/experiments/tree/master/C_kata/rdp/)
+*recursive descent parser* (beginnings of a Scheme interpreter)
+- [`simple_repl`](https://github.com/jloughry/experiments/tree/master/C_kata/simple_repl/)
+*read-eval-print loop*
 - [`sort`](https://github.com/jloughry/experiments/tree/master/C_kata/sort/)
 *a functional version of quicksort using linked lists&mdash;not the in-place variant*
 - [`stack`](https://github.com/jloughry/experiments/tree/master/C_kata/stack/)

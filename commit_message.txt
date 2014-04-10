@@ -1,1 +1,1 @@
-improve tests in rdp Makefile
+update README for experiments
