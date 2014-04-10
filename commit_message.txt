@@ -1,1 +1,1 @@
-update README for experiments
+rdp tokeniser is working but needs to skip commas and whitespace.
