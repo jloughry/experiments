@@ -1,1 +1,1 @@
-rdp lexer accepts all legal Scheme identifiers now.
+if the file specified on the command line does not exist, give an error message

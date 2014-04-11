@@ -128,6 +128,15 @@ struct symbol * getsym(FILE * fp) {
 	return new_symbol;
 }
 
+void destroy_symbol (struct symbol * symbol) {
+	assert(symbol);
+	if (identifier == symbol->type) {
+		assert(symbol->nameval.name);
+		free(symbol->nameval.name);
+	}
+	free(symbol);
+}
+
 int main(int argc, char ** argv) {
 	char * input_filename = NULL;
 	FILE * fp_in = NULL;
@@ -145,7 +154,11 @@ int main(int argc, char ** argv) {
 	}
 	if (input_filename) {
 		fp_in = fopen(input_filename, "r");
-		assert(fp_in);
+		if (!fp_in) {
+			fprintf(stderr, "Error: unable to open \"%s\" for input: %s\n",
+				input_filename, strerror(errno));
+			exit(EXIT_FAILURE);
+		}
 	}
 	else {
 		fp_in = stdin;
@@ -170,6 +183,7 @@ int main(int argc, char ** argv) {
 				printf("Error: unknown symbol type %d in line %d\n", next_symbol->type, __LINE__);
 				break;
 		}
+		destroy_symbol(next_symbol);
 	}
 	printf("Bye.\n");
 

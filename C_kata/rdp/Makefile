@@ -22,6 +22,7 @@ $(executable): $(target).c $(target).h Makefile
 	$(CC) -o $@ $(CFLAGS) $(DEBUG_FLAGS) $<
 
 test: $(executable)
+	-./$< file_that_does_not_exist
 	./$< $(testfile)
 
 common.mk:
@@ -29,6 +30,17 @@ common.mk:
 
 vi:
 	$(editor) $(target).c
+
+header:
+	$(editor) $(target).h
+
+makefile:
+	$(editor) Makefile
+
+commit_this:
+	(cd ../.. && make commit)
+
+commit-this: commit_this
 
 clean::
 	rm -f $(temporary_files)
