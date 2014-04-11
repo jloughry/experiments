@@ -1,1 +1,1 @@
-if the file specified on the command line does not exist, give an error message
+add editor target for header file; add commit-this to commit two directory levels up

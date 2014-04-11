@@ -28,6 +28,14 @@ common.mk:
 vi:
 	$(editor) $(target).c
 
+header:
+	$(editor) $(target).h
+
+commit_this:
+	(cd ../.. && make commit)
+
+commit-this: commit_this
+
 clean::
 	rm -f $(temporary_files)
 
