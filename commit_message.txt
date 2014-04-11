@@ -1,4 +1,1 @@
-rdp is mostly lexing tokens, but misses some identifiers; real Scheme identifiers can be
-the special names "+", "-", "...", or can start with "!", "$", "%", "&", "*", "/", ":", "<",
-">", "=", "?", "~", "_", or "^" and can contain letters, digits, ".", "+", or "-". Before
-doing that, I removed lots of repeated code by defining a couple of preprocessor macros.
+improve framework in C_katas by adding an interface #include file
