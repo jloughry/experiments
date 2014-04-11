@@ -8,6 +8,21 @@
 #define USAGE "Usage: %s [file]\n"
 #define MAX_LINE_LENGTH 1000
 
+/* These are the tokens that the lexical analyser recognises. */
+
+enum symbols { left_paren, right_paren, identifier, number,
+};
+
+/* This is the data structure in which tokens are provided to the parser. */
+
+struct symbol {
+	enum symbols type;
+	union {
+		char * name;
+		long long value;
+	} nameval;
+};
+
 /* GET_NEXT_CHARACTER() and PUSH_BACK() are implemented as macros
 and not functions because they are used all over and it's useful
 for debugging to get an accurate line number in the source code
@@ -35,21 +50,6 @@ moving parts and this helps understand it. */
 			exit(EXIT_FAILURE); \
 		} \
 	} while (0)
-
-/* These are the tokens that the lexical analyser recognises. */
-
-enum symbols { left_paren, right_paren, identifier, number,
-};
-
-/* This is the data structure in which tokens are provided to the parser. */
-
-struct symbol {
-	enum symbols type;
-	union {
-		char * name;
-		int value;
-	} nameval;
-};
 
 /* Function prototypes. */
 

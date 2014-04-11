@@ -25,21 +25,19 @@ int is_identifier_subsequent (char c) {
 	return 0;
 }
 
-/* This function needs to skip whitespace and commas, but only not inside strings. */
-
 struct symbol * getsym(FILE * fp) {
 	char c;
 	struct symbol * new_symbol = NULL;
 	char identifier_name[MAX_LINE_LENGTH];
 	int identifier_name_length = 0;
-	int number_value = 0;
-
-	/* Scheme source code is not line-oriented, except in comments, where it is. */
-
-	/* Skip whitespace and comments. It's tricky, because whitespace is not line-
-	   oriented but comments are. */
+	long long number_value = 0;
+	int minus_flag = 0;
 
 	GET_NEXT_CHARACTER(fp);
+
+	/* Skip whitespace and comments. It's tricky, because whitespace
+	is not line-oriented but comments are. */
+
 	while (isspace((unsigned)c) || ';' == c) {
 		if (';' == c) {
 			while (c != '\n') {
@@ -56,25 +54,57 @@ struct symbol * getsym(FILE * fp) {
 		assert(new_symbol = malloc(sizeof(struct symbol)));
 		new_symbol->type = left_paren;
 		new_symbol->nameval.name = NULL;
+		return new_symbol;
 	}
-	else if (')' == c) {
+
+	if (')' == c) {
 		assert(new_symbol = malloc(sizeof(struct symbol)));
 		new_symbol->type = right_paren;
 		new_symbol->nameval.name = NULL;
+		return new_symbol;
 	}
-	else if (isdigit((unsigned)c)) {
-		number_value = c - '0';
-		GET_NEXT_CHARACTER(fp);
-		while(isdigit((unsigned)c)) {
-			number_value = 10 * number_value + c - '0';
-			GET_NEXT_CHARACTER(fp);
+
+	if ('-' == c || '+' == c || isdigit((unsigned)c)) {
+		number_value = 0;	/* defensive programming */
+		switch(c) {
+			case '-':
+				minus_flag = 1;
+				/* fall-through */
+			case '+':
+				GET_NEXT_CHARACTER(fp);
+				if (!isdigit((unsigned)c)) {
+					PUSH_BACK(c, fp);
+					if (minus_flag) {	/* restore c so we can keep trying to match it */
+						c = '-';
+					}
+					else {
+						c = '+';
+					}
+				}
+				/* fall-through */
+			default:
+				break;
 		}
-		PUSH_BACK(c, fp);
-		assert(new_symbol = malloc(sizeof(struct symbol)));
-		new_symbol->type = number;
-		new_symbol->nameval.value = number_value;
+		if (isdigit((unsigned)c)) {
+			number_value = c - '0';
+			GET_NEXT_CHARACTER(fp);
+			while(isdigit((unsigned)c)) {
+				number_value = 10 * number_value + c - '0';
+				GET_NEXT_CHARACTER(fp);
+			}
+			PUSH_BACK(c, fp);
+			if (minus_flag) {
+				number_value *= -1;
+			}
+			assert(new_symbol = malloc(sizeof(struct symbol)));
+			new_symbol->type = number;
+			new_symbol->nameval.value = number_value;
+			return new_symbol;
+		}
 	}
-	else if (is_identifier_initial(c)) {
+
+	if (is_identifier_initial(c)) {
+		memset(identifier_name, 0, MAX_LINE_LENGTH);	/* defensive programming */
 		identifier_name[0] = c;
 		identifier_name[1] = '\0';
 		identifier_name_length = 1;
@@ -89,8 +119,11 @@ struct symbol * getsym(FILE * fp) {
 		new_symbol->type = identifier;
 		assert(new_symbol->nameval.name = malloc(identifier_name_length + 1));
 		strncpy(new_symbol->nameval.name, identifier_name, identifier_name_length);
+		new_symbol->nameval.name[identifier_name_length] = '\0';	/* strncpy won't terminate it */
+		return new_symbol;
 	}
-	else if ('+' == c || '-' == c) {	/* special case identifier names */
+
+	if ('+' == c || '-' == c) {	/* special case identifier names */
 		identifier_name[0] = c;
 		identifier_name[1] = '\0';
 		identifier_name_length = 1;
@@ -98,8 +131,11 @@ struct symbol * getsym(FILE * fp) {
 		new_symbol->type = identifier;
 		assert(new_symbol->nameval.name = malloc(identifier_name_length + 1));
 		strncpy(new_symbol->nameval.name, identifier_name, identifier_name_length);
+		new_symbol->nameval.name[identifier_name_length] = '\0';
+		return new_symbol;
 	}
-	else if ('.' == c) {	/* another special case identifier name is "..." */
+
+	if ('.' == c) {	/* another special case identifier name is "..." */
 		GET_NEXT_CHARACTER(fp);
 		if ('.' == c) {
 			GET_NEXT_CHARACTER(fp);
@@ -110,6 +146,8 @@ struct symbol * getsym(FILE * fp) {
 				new_symbol->type = identifier;
 				assert(new_symbol->nameval.name = malloc(identifier_name_length + 1));
 				strncpy(new_symbol->nameval.name, identifier_name, identifier_name_length);
+				new_symbol->nameval.name[identifier_name_length] = '\0';
+				return new_symbol;
 			}
 			else {
 				PUSH_BACK(c, FP);
@@ -119,13 +157,13 @@ struct symbol * getsym(FILE * fp) {
 			PUSH_BACK(c, FP);	/* that ungetc() will work more than once, but the */
 		}						/* Scheme language requires that "..." be allowed. */
 	}
-	else if (EOF == c) {
-			;	/* This is not a problem; it's how we know we've reached end of input. */
-	}
-	else {
+
+	/* If we haven't found a symbol yet, we might be at the end of the file. */
+
+	if (EOF != c) {
 		fprintf(stderr, "error in getsym(): unrecognised token '%c' (%d)\n", c, (int)c);
 	}
-	return new_symbol;
+	return NULL;
 }
 
 void destroy_symbol (struct symbol * symbol) {
@@ -174,7 +212,7 @@ int main(int argc, char ** argv) {
 				printf("close paren\n");
 				break;
 			case number:
-				printf("number: %d\n", next_symbol->nameval.value);
+				printf("number: %lld\n", next_symbol->nameval.value);
 				break;
 			case identifier:
 				printf("identifier: \"%s\"\n", next_symbol->nameval.name);
