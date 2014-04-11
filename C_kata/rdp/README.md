@@ -11,3 +11,11 @@ maps more directly to functions.
 
 My grammar is for a simplified Scheme variant; for now, beginning with *s*-expressions.
 
+Features
+--------
+1. It accepts all legal Scheme identifiers.
+
+TODO
+----
+1. Numbers should allow signs.
+

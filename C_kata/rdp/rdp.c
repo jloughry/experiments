@@ -1,57 +1,28 @@
-#include <assert.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define USAGE "Usage: %s [file]\n"
-#define MAX_LINE_LENGTH 1000
-
-/*
-GET_NEXT_CHARACTER() and PUSH_BACK() are implemented as macros and not
-functions because they are used all over and it's useful for debugging
-to get an accurate line number when they fail.
-*/
-
-#define GET_NEXT_CHARACTER(file_pointer) \
-	do { \
-		c = fgetc(file_pointer); \
-		if (EOF == c) { \
-			if (feof(file_pointer)) { \
-				fprintf (stderr, "EOF at line %d\n", __LINE__); \
-				exit(EXIT_FAILURE); \
-			} \
-			else if (ferror(file_pointer)) { \
-				fprintf(stderr, "file error at line %d\n", __LINE__); \
-				exit(EXIT_FAILURE); \
-			} \
-		} \
-	} while (0)
-
-#define PUSH_BACK(c, file_pointer) \
-	do { \
-		if (EOF == ungetc(c, fp)) { \
-			fprintf(stderr, "file error in push_back() at line %d\n", __LINE__); \
-			exit(EXIT_FAILURE); \
-		} \
-	} while (0)
-
-enum symbols { left_paren, right_paren, identifier, number,
-};
-
-struct symbol {
-	enum symbols type;
-	union {
-		char * name;
-		int value;
-	} nameval;
-};
-
-void prompt (void);
-struct symbol * getsym (FILE * fp);
+#include "rdp.h"
 
 void prompt (void) {
 	printf ("> ");
+}
+
+/* returns true if c is allowed to start a Scheme identifier */
+
+int is_identifier_initial (char c) {
+	if (isalpha((unsigned)c) || '!' == c || '$' == c || '%' == c || '&' == c
+		|| '*' == c || '/' == c || ':' == c || '<' == c || '=' == c
+		|| '>' == c || '?' == c || '~' == c || '_' == c || '^' == c) {
+		return 1;
+	}
+	return 0;
+}
+
+/* returns true if c is one of the other characters allowed in a Scheme identifier */
+
+int is_identifier_subsequent (char c) {
+	if (is_identifier_initial(c) || isdigit((unsigned)c)
+		|| '.' == c || '+' == c || '-' == c) {
+		return 1;
+	}
+	return 0;
 }
 
 /* This function needs to skip whitespace and commas, but only not inside strings. */
@@ -103,12 +74,12 @@ struct symbol * getsym(FILE * fp) {
 		new_symbol->type = number;
 		new_symbol->nameval.value = number_value;
 	}
-	else if (isalpha((unsigned)c)) {
+	else if (is_identifier_initial(c)) {
 		identifier_name[0] = c;
 		identifier_name[1] = '\0';
+		identifier_name_length = 1;
 		GET_NEXT_CHARACTER(fp);
-		while(isalnum((unsigned)c)) {
-			identifier_name_length = strlen(identifier_name);
+		while(is_identifier_subsequent(c)) {
 			identifier_name[identifier_name_length] = c;
 			identifier_name[++identifier_name_length] = '\0';
 			GET_NEXT_CHARACTER(fp);
@@ -118,6 +89,38 @@ struct symbol * getsym(FILE * fp) {
 		new_symbol->type = identifier;
 		assert(new_symbol->nameval.name = malloc(identifier_name_length + 1));
 		strncpy(new_symbol->nameval.name, identifier_name, identifier_name_length);
+	}
+	else if ('+' == c || '-' == c) {	/* special case identifier names */
+		identifier_name[0] = c;
+		identifier_name[1] = '\0';
+		identifier_name_length = 1;
+		assert(new_symbol = malloc(sizeof(struct symbol)));
+		new_symbol->type = identifier;
+		assert(new_symbol->nameval.name = malloc(identifier_name_length + 1));
+		strncpy(new_symbol->nameval.name, identifier_name, identifier_name_length);
+	}
+	else if ('.' == c) {	/* another special case identifier name is "..." */
+		GET_NEXT_CHARACTER(fp);
+		if ('.' == c) {
+			GET_NEXT_CHARACTER(fp);
+			if ('.' == c) {
+				strcpy(identifier_name, "...");
+				identifier_name_length = 3;
+				assert(new_symbol = malloc(sizeof(struct symbol)));
+				new_symbol->type = identifier;
+				assert(new_symbol->nameval.name = malloc(identifier_name_length + 1));
+				strncpy(new_symbol->nameval.name, identifier_name, identifier_name_length);
+			}
+			else {
+				PUSH_BACK(c, FP);
+			}
+		}
+		else {					/* This is tricly because ANSI C doesn't guarantee */
+			PUSH_BACK(c, FP);	/* that ungetc() will work more than once, but the */
+		}						/* Scheme language requires that "..." be allowed. */
+	}
+	else if (EOF == c) {
+			;	/* This is not a problem; it's how we know we've reached end of input. */
 	}
 	else {
 		fprintf(stderr, "error in getsym(): unrecognised token '%c' (%d)\n", c, (int)c);
@@ -146,21 +149,22 @@ int main(int argc, char ** argv) {
 	}
 	else {
 		fp_in = stdin;
+		prompt();
 	}
 
 	while ((next_symbol = getsym(fp_in))) {
 		switch (next_symbol->type) {
 			case left_paren:
-				printf("main() found an open paren\n");
+				printf("open paren\n");
 				break;
 			case right_paren:
-				printf("main() found a close paren\n");
+				printf("close paren\n");
 				break;
 			case number:
-				printf("main() found a number: %d\n", next_symbol->nameval.value);
+				printf("number: %d\n", next_symbol->nameval.value);
 				break;
 			case identifier:
-				printf("main() found an identifier: \"%s\"\n", next_symbol->nameval.name);
+				printf("identifier: \"%s\"\n", next_symbol->nameval.name);
 				break;
 			default:
 				printf("Error: unknown symbol type %d in line %d\n", next_symbol->type, __LINE__);

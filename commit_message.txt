@@ -1,1 +1,1 @@
-improve framework in C_katas by adding an interface #include file
+rdp lexer accepts all legal Scheme identifiers now.

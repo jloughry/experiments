@@ -18,7 +18,7 @@ all:: $(executable)
 # $@ is target; $< is first dependency; $^ is all dependencies; $? is all newer dependencies
 #
 
-$(executable): $(target).c Makefile
+$(executable): $(target).c $(target).h Makefile
 	$(CC) -o $@ $(CFLAGS) $(DEBUG_FLAGS) $<
 
 test: $(executable)
