@@ -1,1 +1,4 @@
-rdp tokeniser is working but needs to skip commas and whitespace.
+rdp is mostly lexing tokens, but misses some identifiers; real Scheme identifiers can be
+the special names "+", "-", "...", or can start with "!", "$", "%", "&", "*", "/", ":", "<",
+">", "=", "?", "~", "_", or "^" and can contain letters, digits, ".", "+", or "-". Before
+doing that, I removed lots of repeated code by defining a couple of preprocessor macros.
