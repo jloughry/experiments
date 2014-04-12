@@ -10,7 +10,7 @@
 
 /* These are the tokens that the lexical analyser recognises. */
 
-enum tokens { left_paren, right_paren, identifier, number,
+enum tokens { left_paren, right_paren, identifier, number, boolean, string,
 };
 
 /* This is the data structure in which tokens are provided to the parser. */
@@ -19,7 +19,9 @@ struct token {
 	enum tokens type;
 	union {
 		char * name;
-		long long value;
+		int	boolean_value;
+		long long numeric_value;
+		char * string_value;
 	} nameval;
 };
 

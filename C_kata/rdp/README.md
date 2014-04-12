@@ -18,6 +18,9 @@ Features
 2. Numbers are integers only, but represented internally as `long long` int. Numbers
 can have + or - signs on them, but no radix indicators or decimal points yet.
 
+3. It understands #t and #f booleans, and strings with or without embedded quotation
+marks.
+
 TODO
 ----
 1. Add mutually recursive functions to parse expressions.
@@ -25,4 +28,12 @@ TODO
 2. Build parse tree of an entire programme.
 
 3. Walk the tree and interpret the programme.
+
+Notes:
+------
+
+ANSI C does not guarantee `ungetc(3)` to work more than once; in several instances
+we need to push back more than one character. One way to avoid the necessity is to
+implement look-ahead, as in a LALR(1) parser; investigate how to do this with FILE
+streams.
 

@@ -29,7 +29,9 @@ struct token * getsym(FILE * fp) {
 	char c;
 	struct token * new_token = NULL;
 	char identifier_name[MAX_LINE_LENGTH];
+	char string_accumulator[MAX_LINE_LENGTH];
 	int identifier_name_length = 0;
+	int string_length = 0;
 	long long number_value = 0;
 	int minus_flag = 0;
 
@@ -62,6 +64,53 @@ struct token * getsym(FILE * fp) {
 		new_token->type = right_paren;
 		new_token->nameval.name = NULL;
 		return new_token;
+	}
+
+	if ('"' == c) {
+		memset(string_accumulator, 0, MAX_LINE_LENGTH);
+		string_length = 0;
+		GET_NEXT_CHARACTER(fp);	/* eat the beginning quotation mark */
+		while (c != '"') {
+			if ('\\' == c) {
+				GET_NEXT_CHARACTER(fp);	/* eat the backslash */
+				switch (c) {
+					case 'n':
+						c = '\n';	/* turn \n into a real newline */
+						break;
+					default:
+						break;
+				}
+			}
+			string_accumulator[string_length] = c;
+			string_accumulator[++string_length] = '\0';
+			GET_NEXT_CHARACTER(fp);
+		}
+		GET_NEXT_CHARACTER(fp);	/* eat the ending quotation mark */
+		assert(new_token = malloc(sizeof(struct token)));
+		new_token->type = string;
+		(assert(new_token->nameval.string_value = malloc(string_length + 1)));
+		strncpy(new_token->nameval.string_value, string_accumulator, string_length);
+		new_token->nameval.string_value[string_length] = '\0';	/* strncpy won't terminate it */
+		return new_token;
+	}
+
+	if ('#' == c) {
+		GET_NEXT_CHARACTER(fp);
+		if ('t' == c || 'f' == c) {
+			assert(new_token = malloc(sizeof(struct token)));
+			new_token->type = boolean;
+			if ('t' == c) {
+				new_token->nameval.boolean_value = 1;
+			}
+			else {
+				new_token->nameval.boolean_value = 0;
+			}
+			return new_token;
+		}
+		else {
+			PUSH_BACK(c, fp);
+			PUSH_BACK('#', fp);	/* WARNING: pushing back twice is not guaranteed to work */
+		}
 	}
 
 	if ('-' == c || '+' == c || isdigit((unsigned)c)) {
@@ -98,7 +147,7 @@ struct token * getsym(FILE * fp) {
 			}
 			assert(new_token = malloc(sizeof(struct token)));
 			new_token->type = number;
-			new_token->nameval.value = number_value;
+			new_token->nameval.numeric_value = number_value;
 			return new_token;
 		}
 	}
@@ -153,7 +202,7 @@ struct token * getsym(FILE * fp) {
 				PUSH_BACK(c, FP);
 			}
 		}
-		else {					/* This is tricly because ANSI C doesn't guarantee */
+		else {					/* This is tricky because ANSI C doesn't guarantee */
 			PUSH_BACK(c, FP);	/* that ungetc() will work more than once, but the */
 		}						/* Scheme language requires that "..." be allowed. */
 	}
@@ -171,6 +220,10 @@ void destroy_token (struct token * token) {
 	if (identifier == token->type) {
 		assert(token->nameval.name);
 		free(token->nameval.name);
+	}
+	else if (string == token->type) {
+		assert(token->nameval.string_value);
+		free(token->nameval.string_value);
 	}
 	free(token);
 }
@@ -203,6 +256,8 @@ int main(int argc, char ** argv) {
 		prompt();
 	}
 
+	
+
 	while ((next_token = getsym(fp_in))) {
 		switch (next_token->type) {
 			case left_paren:
@@ -211,8 +266,14 @@ int main(int argc, char ** argv) {
 			case right_paren:
 				printf("close paren\n");
 				break;
+			case boolean:
+				printf("boolean: %s\n", 1 == next_token->nameval.boolean_value ? "true" : "false");
+				break;
 			case number:
-				printf("number: %lld\n", next_token->nameval.value);
+				printf("number: %lld\n", next_token->nameval.numeric_value);
+				break;
+			case string:
+				printf("string: \"%s\"\n", next_token->nameval.string_value);
 				break;
 			case identifier:
 				printf("identifier: \"%s\"\n", next_token->nameval.name);

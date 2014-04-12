@@ -1,1 +1,1 @@
-rename 'symbol' to 'token' in rdp in anticipation of implementing parser.
+rdp: implemented strings (with optional embedded quotation marks or newlines) and #t and #f booleans
