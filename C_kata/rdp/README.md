@@ -15,7 +15,14 @@ Features
 --------
 1. It accepts all legal Scheme identifiers.
 
+2. Numbers are integers only, but represented internally as `long long` int. Numbers
+can have + or - signs on them, but no radix indicators or decimal points yet.
+
 TODO
 ----
-1. Numbers should allow signs.
+1. Add mutually recursive functions to parse expressions.
+
+2. Build parse tree of an entire programme.
+
+3. Walk the tree and interpret the programme.
 

@@ -10,13 +10,13 @@
 
 /* These are the tokens that the lexical analyser recognises. */
 
-enum symbols { left_paren, right_paren, identifier, number,
+enum tokens { left_paren, right_paren, identifier, number,
 };
 
 /* This is the data structure in which tokens are provided to the parser. */
 
-struct symbol {
-	enum symbols type;
+struct token {
+	enum tokens type;
 	union {
 		char * name;
 		long long value;
@@ -54,7 +54,7 @@ moving parts and this helps understand it. */
 /* Function prototypes. */
 
 void prompt (void);
-struct symbol * getsym (FILE * fp);
+struct token * getsym (FILE * fp);
 int is_identifier_initial (char c);
 int is_identifier_subsequent (char c);
 

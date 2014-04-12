@@ -25,9 +25,9 @@ int is_identifier_subsequent (char c) {
 	return 0;
 }
 
-struct symbol * getsym(FILE * fp) {
+struct token * getsym(FILE * fp) {
 	char c;
-	struct symbol * new_symbol = NULL;
+	struct token * new_token = NULL;
 	char identifier_name[MAX_LINE_LENGTH];
 	int identifier_name_length = 0;
 	long long number_value = 0;
@@ -51,17 +51,17 @@ struct symbol * getsym(FILE * fp) {
 	}
 
 	if ('(' == c) {
-		assert(new_symbol = malloc(sizeof(struct symbol)));
-		new_symbol->type = left_paren;
-		new_symbol->nameval.name = NULL;
-		return new_symbol;
+		assert(new_token = malloc(sizeof(struct token)));
+		new_token->type = left_paren;
+		new_token->nameval.name = NULL;
+		return new_token;
 	}
 
 	if (')' == c) {
-		assert(new_symbol = malloc(sizeof(struct symbol)));
-		new_symbol->type = right_paren;
-		new_symbol->nameval.name = NULL;
-		return new_symbol;
+		assert(new_token = malloc(sizeof(struct token)));
+		new_token->type = right_paren;
+		new_token->nameval.name = NULL;
+		return new_token;
 	}
 
 	if ('-' == c || '+' == c || isdigit((unsigned)c)) {
@@ -96,10 +96,10 @@ struct symbol * getsym(FILE * fp) {
 			if (minus_flag) {
 				number_value *= -1;
 			}
-			assert(new_symbol = malloc(sizeof(struct symbol)));
-			new_symbol->type = number;
-			new_symbol->nameval.value = number_value;
-			return new_symbol;
+			assert(new_token = malloc(sizeof(struct token)));
+			new_token->type = number;
+			new_token->nameval.value = number_value;
+			return new_token;
 		}
 	}
 
@@ -115,24 +115,24 @@ struct symbol * getsym(FILE * fp) {
 			GET_NEXT_CHARACTER(fp);
 		}
 		PUSH_BACK(c, fp);
-		assert(new_symbol = malloc(sizeof(struct symbol)));
-		new_symbol->type = identifier;
-		assert(new_symbol->nameval.name = malloc(identifier_name_length + 1));
-		strncpy(new_symbol->nameval.name, identifier_name, identifier_name_length);
-		new_symbol->nameval.name[identifier_name_length] = '\0';	/* strncpy won't terminate it */
-		return new_symbol;
+		assert(new_token = malloc(sizeof(struct token)));
+		new_token->type = identifier;
+		assert(new_token->nameval.name = malloc(identifier_name_length + 1));
+		strncpy(new_token->nameval.name, identifier_name, identifier_name_length);
+		new_token->nameval.name[identifier_name_length] = '\0';	/* strncpy won't terminate it */
+		return new_token;
 	}
 
 	if ('+' == c || '-' == c) {	/* special case identifier names */
 		identifier_name[0] = c;
 		identifier_name[1] = '\0';
 		identifier_name_length = 1;
-		assert(new_symbol = malloc(sizeof(struct symbol)));
-		new_symbol->type = identifier;
-		assert(new_symbol->nameval.name = malloc(identifier_name_length + 1));
-		strncpy(new_symbol->nameval.name, identifier_name, identifier_name_length);
-		new_symbol->nameval.name[identifier_name_length] = '\0';
-		return new_symbol;
+		assert(new_token = malloc(sizeof(struct token)));
+		new_token->type = identifier;
+		assert(new_token->nameval.name = malloc(identifier_name_length + 1));
+		strncpy(new_token->nameval.name, identifier_name, identifier_name_length);
+		new_token->nameval.name[identifier_name_length] = '\0';
+		return new_token;
 	}
 
 	if ('.' == c) {	/* another special case identifier name is "..." */
@@ -142,12 +142,12 @@ struct symbol * getsym(FILE * fp) {
 			if ('.' == c) {
 				strcpy(identifier_name, "...");
 				identifier_name_length = 3;
-				assert(new_symbol = malloc(sizeof(struct symbol)));
-				new_symbol->type = identifier;
-				assert(new_symbol->nameval.name = malloc(identifier_name_length + 1));
-				strncpy(new_symbol->nameval.name, identifier_name, identifier_name_length);
-				new_symbol->nameval.name[identifier_name_length] = '\0';
-				return new_symbol;
+				assert(new_token = malloc(sizeof(struct token)));
+				new_token->type = identifier;
+				assert(new_token->nameval.name = malloc(identifier_name_length + 1));
+				strncpy(new_token->nameval.name, identifier_name, identifier_name_length);
+				new_token->nameval.name[identifier_name_length] = '\0';
+				return new_token;
 			}
 			else {
 				PUSH_BACK(c, FP);
@@ -158,7 +158,7 @@ struct symbol * getsym(FILE * fp) {
 		}						/* Scheme language requires that "..." be allowed. */
 	}
 
-	/* If we haven't found a symbol yet, we might be at the end of the file. */
+	/* If we haven't found a token yet, we might be at the end of the file. */
 
 	if (EOF != c) {
 		fprintf(stderr, "error in getsym(): unrecognised token '%c' (%d)\n", c, (int)c);
@@ -166,19 +166,19 @@ struct symbol * getsym(FILE * fp) {
 	return NULL;
 }
 
-void destroy_symbol (struct symbol * symbol) {
-	assert(symbol);
-	if (identifier == symbol->type) {
-		assert(symbol->nameval.name);
-		free(symbol->nameval.name);
+void destroy_token (struct token * token) {
+	assert(token);
+	if (identifier == token->type) {
+		assert(token->nameval.name);
+		free(token->nameval.name);
 	}
-	free(symbol);
+	free(token);
 }
 
 int main(int argc, char ** argv) {
 	char * input_filename = NULL;
 	FILE * fp_in = NULL;
-	struct symbol * next_symbol = NULL;
+	struct token * next_token = NULL;
 
 	switch (argc) {
 		case 1:
@@ -203,8 +203,8 @@ int main(int argc, char ** argv) {
 		prompt();
 	}
 
-	while ((next_symbol = getsym(fp_in))) {
-		switch (next_symbol->type) {
+	while ((next_token = getsym(fp_in))) {
+		switch (next_token->type) {
 			case left_paren:
 				printf("open paren\n");
 				break;
@@ -212,16 +212,16 @@ int main(int argc, char ** argv) {
 				printf("close paren\n");
 				break;
 			case number:
-				printf("number: %lld\n", next_symbol->nameval.value);
+				printf("number: %lld\n", next_token->nameval.value);
 				break;
 			case identifier:
-				printf("identifier: \"%s\"\n", next_symbol->nameval.name);
+				printf("identifier: \"%s\"\n", next_token->nameval.name);
 				break;
 			default:
-				printf("Error: unknown symbol type %d in line %d\n", next_symbol->type, __LINE__);
+				printf("Error: unknown token type %d in line %d\n", next_token->type, __LINE__);
 				break;
 		}
-		destroy_symbol(next_symbol);
+		destroy_token(next_token);
 	}
 	printf("Bye.\n");
 

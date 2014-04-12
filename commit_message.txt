@@ -1,1 +1,1 @@
-rdp is parsing identifiers, numbers, and parentheses correctly.
+rename 'symbol' to 'token' in rdp in anticipation of implementing parser.

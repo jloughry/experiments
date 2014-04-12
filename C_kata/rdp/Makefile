@@ -38,6 +38,7 @@ makefile:
 	$(editor) Makefile
 
 commit_this:
+	make allclean
 	(cd ../.. && make commit)
 
 commit-this: commit_this
