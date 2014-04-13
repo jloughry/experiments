@@ -37,3 +37,9 @@ we need to push back more than one character. One way to avoid the necessity is 
 implement look-ahead, as in a LALR(1) parser; investigate how to do this with FILE
 streams.
 
+Two global variables are used&mdash;for now&mdash;to match the structure in the
+[Wikipedia article](http://en.wikipedia.org/wiki/Recursive_descent_parser) on
+&lsquo;Recursive descent parser&rsquo;. When I get it working and understand the
+*algorithm* better, I'll remove the globabl variables and improve the structure
+of the *programme*.
+

@@ -1,1 +1,1 @@
-rdp: implemented strings (with optional embedded quotation marks or newlines) and #t and #f booleans
+had to convert sym and fp to global variables to match the structure of the parser I wanted to use

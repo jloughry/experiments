@@ -10,18 +10,18 @@
 
 /* These are the tokens that the lexical analyser recognises. */
 
-enum tokens { left_paren, right_paren, identifier, number, boolean, string,
+enum tokens { left_paren, right_paren, identifier, number, boolean, string, define,
 };
 
 /* This is the data structure in which tokens are provided to the parser. */
 
 struct token {
 	enum tokens type;
-	union {
-		char * name;
-		int	boolean_value;
+	union value_holder {
+		char identifier_name[MAX_LINE_LENGTH];
+		char string_value[MAX_LINE_LENGTH];
 		long long numeric_value;
-		char * string_value;
+		int	boolean_value;
 	} nameval;
 };
 
@@ -56,7 +56,15 @@ moving parts and this helps understand it. */
 /* Function prototypes. */
 
 void prompt (void);
-struct token * getsym (FILE * fp);
+void getsym (void);
 int is_identifier_initial (char c);
 int is_identifier_subsequent (char c);
+void destroy_token (struct token * token);
+void display_token(struct token t);
+void program (void);
+
+/* global variables */
+
+struct token sym;
+FILE * fp = NULL;
 
