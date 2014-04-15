@@ -402,7 +402,12 @@ int main(int argc, char ** argv) {
 		prompt();
 	}
 
-	programme();
+	/* programme(); */
+
+	do {
+		getsym();
+		display_token(sym);
+	} while (!feof(fp));
 
 	printf("Bye.\n");
 
