@@ -10,7 +10,9 @@
 
 /* These are the tokens that the lexical analyser recognises. */
 
-enum tokens { left_paren, right_paren, identifier, number, boolean, string, define,
+enum tokens { left_paren, right_paren, identifier, number, boolean, string,
+	define, character, variable_definition_sym, definition_sym, expression_sym,
+	constant_sym, variable_sym,
 };
 
 /* This is the data structure in which tokens are provided to the parser. */
@@ -61,7 +63,15 @@ int is_identifier_initial (char c);
 int is_identifier_subsequent (char c);
 void destroy_token (struct token * token);
 void display_token(struct token t);
-void program (void);
+void programme (void);
+void form (void);
+void variable (void);
+void constant (void);
+void defintion (void);
+void expression (void);
+void variable_definition (void);
+int accept (struct token t);
+int expect (struct token t);
 
 /* global variables */
 

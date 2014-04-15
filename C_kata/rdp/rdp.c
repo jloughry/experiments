@@ -254,9 +254,126 @@ void destroy_token (struct token * token) {
 	free(token);
 }
 
-void program (void) {
+int accept (struct token t) {
+	if (sym.type == t.type) {
+		getsym();
+		return 1;
+	}
+	return 0;
+}
+
+int expect (struct token t) {
+	if (accept(t)) {
+		return 1;
+	}
+	fprintf(stderr, "Error: unexpected symbol\n");
+	return 0;
+}
+
+void programme (void) {
 	getsym();
-	display_token(sym);
+	form();
+}
+
+void form (void) {
+	struct token to_match;
+
+	to_match.type = definition_sym;
+	if (accept(to_match)) {
+		fprintf(stderr, "form() matched a definition\n");
+	}
+	else {
+		to_match.type = expression_sym;
+		if (accept(to_match)) {
+			fprintf(stderr, "form() matched an expression\n");
+		}
+		else {
+			fprintf(stderr, "syntax error in form()\n");
+		}
+	}
+}
+
+void defintion (void) {
+	struct token to_match = {variable_definition_sym};
+
+	if (accept(to_match)) {
+		fprintf(stderr, "definition() matched a variable_definition\n");
+	}
+}
+
+void variable_definition (void) {
+	struct token first_to_match, second_to_match, third_to_match;
+
+	first_to_match.type = left_paren;
+	if (accept(first_to_match)) {
+		second_to_match.type = define;
+		expect(second_to_match);
+		expression();
+		third_to_match.type = right_paren;
+		expect(third_to_match);
+	}
+	else {
+		fprintf(stderr, "syntax error in variable_definition()\n");
+	}
+}
+
+void expression (void) {
+	struct token to_match;
+
+	to_match.type = constant_sym;
+	if (accept(to_match)) {
+		fprintf(stderr, "expression() matched a constant\n");
+	}
+	else {
+		to_match.type = variable_sym;
+		if (accept(to_match)) {
+			fprintf(stderr, "expression() matched a variable\n");
+		}
+		else {
+			fprintf(stderr, "syntax error in expression()\n");
+		}
+	}
+}
+
+void variable (void) {
+	struct token to_match = {identifier};
+
+	if (accept(to_match)) {
+		fprintf(stderr, "variable() matched an identifier\n");
+	} else {
+		fprintf(stderr, "syntax error in variable()\n");
+		getsym();
+	}
+}
+
+void constant (void) {
+	struct token to_match;
+
+	to_match.type = boolean;
+	if (accept(to_match)) {
+		fprintf(stderr, "constant() matched a boolean\n");
+	}
+	else {
+		to_match.type = number;
+		if (accept(to_match)) {
+			fprintf(stderr, "constant() matched a number\n");
+		}
+		else {
+			to_match.type = character;	/* TODO: character is not lexed yet */
+			if (accept(to_match)) {
+				fprintf(stderr, "constant() matched a character\n");
+			}
+			else {
+				to_match.type = string;
+				if (accept(to_match)) {
+					fprintf(stderr, "constant() matched a string\n");
+				}
+				else {
+					fprintf(stderr, "syntax error in constant()\n");
+				}
+			}
+		}
+	}
 }
 
 int main(int argc, char ** argv) {
@@ -285,7 +402,7 @@ int main(int argc, char ** argv) {
 		prompt();
 	}
 
-	program();
+	programme();
 
 	printf("Bye.\n");
 
