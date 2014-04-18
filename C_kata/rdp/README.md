@@ -21,6 +21,11 @@ can have + or - signs on them, but no radix indicators or decimal points yet.
 3. It understands #t and #f booleans, and strings with or without embedded quotation
 marks.
 
+4. A pre-processor (sed script) is used to remove comments before lexing. Following
+convention, comments are replaced by a single space; newlines are left in place so
+that the parser, eventually, can report sensible line numbers of syntax errors in the
+source.
+
 TODO
 ----
 1. Add mutually recursive functions to parse expressions.
@@ -40,6 +45,6 @@ streams.
 Two global variables are used&mdash;for now&mdash;to match the structure in the
 [Wikipedia article](http://en.wikipedia.org/wiki/Recursive_descent_parser) on
 &lsquo;Recursive descent parser&rsquo;. When I get it working and understand the
-*algorithm* better, I'll remove the globabl variables and improve the structure
+*algorithm* better, I'll remove the global variables and improve the structure
 of the *programme*.
 

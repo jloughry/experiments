@@ -83,6 +83,8 @@ This is a series of *kata* type exercises in C. So far, the working ones are:
 
 - [`binary_search_tree`](https://github.com/jloughry/experiments/tree/master/C_kata/binary_search_tree/)
 *an implementation of a binary search tree*
+- [`bloom_filter`](https://github.com/jloughry/experiments/tree/master/C_kata/bloom_filter/)
+*very simple Bloom filter*
 - [`framework`](https://github.com/jloughry/experiments/tree/master/C_kata/framework/)
 *copy this directory to begin writing a new C programme quickly*
 - [`google_docs`](https://github.com/jloughry/experiments/tree/master/C_kata/google_docs/)

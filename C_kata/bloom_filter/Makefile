@@ -1,15 +1,10 @@
-target = rdp
+target = bloom_filter
 
 executable = $(target).exe
 
-CC=gcc
+CC=g++
 CFLAGS = -Wall -Wunreachable-code -Werror
-DEBUG_FLAGS = -DDEBUG
-PRODUCTION_FLAGS = -DNDEBUG
 editor = vi
-
-testfile = length.scm
-preprocessor = ./pre-process.sh
 
 temporary_files = $(executable).stackdump consolidated_bibtex_file.bib
 
@@ -20,13 +15,10 @@ all:: $(executable)
 #
 
 $(executable): $(target).c $(target).h Makefile
-	$(CC) -o $@ $(CFLAGS) $(DEBUG_FLAGS) $<
+	$(CC) -o $@ $(CFLAGS) $<
 
 test: $(executable)
-	-./$< file_that_does_not_exist
-	$(preprocessor) $(testfile) | ./$<
-	@echo
-	@echo "All tests succeeded."
+	./$<
 
 common.mk:
 	ln -s /home/rjl/Documents/thesis/github/Makefiles/common.mk
@@ -37,11 +29,7 @@ vi:
 header:
 	$(editor) $(target).h
 
-makefile:
-	$(editor) Makefile
-
 commit_this:
-	make allclean
 	(cd ../.. && make commit)
 
 commit-this: commit_this

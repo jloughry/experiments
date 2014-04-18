@@ -36,19 +36,10 @@ void getsym(void) {
 
 	GET_NEXT_CHARACTER(fp);
 
-	/* Skip whitespace and comments. It's tricky, because whitespace
-	is not line-oriented but comments are. */
+	/* Skip whitespace; assume comments have already been removed by the preprocessor. */
 
-	while (isspace((unsigned)c) || ';' == c) {
-		if (';' == c) {
-			while (c != '\n') {
-				GET_NEXT_CHARACTER(fp);
-			}
-			GET_NEXT_CHARACTER(fp);
-		}
-		while (isspace((unsigned)c)) {
-			GET_NEXT_CHARACTER(fp);
-		}
+	while (isspace((unsigned)c)) {
+		GET_NEXT_CHARACTER(fp);
 	}
 
 	if ('(' == c) {

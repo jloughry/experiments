@@ -1,1 +1,1 @@
-working shellsort; not working merge sort[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D sort; not working merge sort
+use a pre-processing step to remove comments in rdp before lexing source code
