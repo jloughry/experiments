@@ -1,1 +1,1 @@
-initial commit for rdp in Java
+begin converting to Java; the Makefile is working

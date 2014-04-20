@@ -1,11 +1,9 @@
 target = rdp
 
-executable = $(target).exe
+executable = $(target).class
+source = $(target).java
 
-CC=gcc
-CFLAGS = -Wall -Wunreachable-code -Werror
-DEBUG_FLAGS = -DDEBUG
-PRODUCTION_FLAGS = -DNDEBUG
+compile = javac
 editor = vi
 
 testfile = length.scm
@@ -19,10 +17,12 @@ all:: $(executable)
 # $@ is target; $< is first dependency; $^ is all dependencies; $? is all newer dependencies
 #
 
-$(executable): $(target).c $(target).h Makefile
-	$(CC) -o $@ $(CFLAGS) $(DEBUG_FLAGS) $<
+$(executable): $(source) Makefile
+	$(compile) $<
 
 test: $(executable)
+	java $(target)
+	/bin/false
 	-./$< file_that_does_not_exist
 	$(preprocessor) $(testfile) | ./$<
 	@echo
@@ -32,10 +32,7 @@ common.mk:
 	ln -s /home/rjl/Documents/thesis/github/Makefiles/common.mk
 
 vi:
-	$(editor) $(target).c
-
-header:
-	$(editor) $(target).h
+	$(editor) $(target).java
 
 makefile:
 	$(editor) Makefile
