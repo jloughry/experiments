@@ -1,1 +1,1 @@
-update README for J_kata
+translating C functions to Java methods
