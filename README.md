@@ -116,10 +116,20 @@ and destroyed when no longer needed. Thread safety is not considered. In the `ha
 The style used throughout, with the exception of `assert()`, is pedantic. Cleverness is
 eschewed in favour of clarity and reliability.
 
+J_kata
+------
+
+This is a series of *kata*-type exercises in Java. So far, they consist of:
+
+-[`rdp`](https://github.com/jloughry/experiments/tree/master/J_kata/rdp/)
+*recursive descent parser* (the beginnings of a Scheme interpreter)
+
 TODO
 ----
 
-1. Improve commenting in the C_kata examples.
+1. Improve commenting throughout C_kata sections.
 
 2. Extend repl or rdp into a functioning Scheme interpreter.
+
+3. Develop knowledge of Java idioms and libraries in rdp.
 

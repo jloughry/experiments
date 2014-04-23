@@ -4,6 +4,7 @@ executable = $(target).class
 source = $(target).java
 
 compile = javac
+cflags = -Werror -Xlint:all
 editor = vi
 
 testfile = length.scm
@@ -18,7 +19,7 @@ all:: $(executable)
 #
 
 $(executable): $(source) Makefile
-	$(compile) $<
+	$(compile) $(cflags) $<
 
 test: $(executable)
 	java $(target)

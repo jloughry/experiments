@@ -1,1 +1,1 @@
-command line arguments and argv[0] (which is not portable beyond Sun's Java implementation)
+update README for J_kata
