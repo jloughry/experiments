@@ -1,1 +1,1 @@
-translating C functions to Java methods
+begin Scheme_kata collection; update README

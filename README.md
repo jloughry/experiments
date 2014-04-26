@@ -122,14 +122,23 @@ J_kata
 This is a series of *kata*-type exercises in Java. So far, they consist of:
 
 -[`rdp`](https://github.com/jloughry/experiments/tree/master/J_kata/rdp/)
-*recursive descent parser* (the beginnings of a Scheme interpreter)
+*recursive descent parser* (the beginnings of a Scheme interpreter).
+
+Scheme_kata
+-----------
+
+More *kata*s in Scheme. So far, the set consist of:
+
+-[`rdp`](https://github.com/jloughry/experiments/tree/master/Scheme_kata/rdp/)
+*recursive descent parser* (the beginnings of a new Scheme interpreter).
 
 TODO
 ----
 
 1. Improve commenting throughout C_kata sections.
 
-2. Extend repl or rdp into a functioning Scheme interpreter.
+2. Extend repl or rdp into a functioning Scheme interpreter beginning with
+&lt;program&gt; and &lt;form&gt;.
 
 3. Develop knowledge of Java idioms and libraries in rdp.
 
