@@ -1,1 +1,1 @@
-added utility programme to test redirection of stdout and stderr when called from crontab
+update readme with a new section for 'Test Programmes'

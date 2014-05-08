@@ -132,6 +132,14 @@ More *kata*s in Scheme. So far, the set consist of:
 -[`rdp`](https://github.com/jloughry/experiments/tree/master/Scheme_kata/rdp/)
 *recursive descent parser* (the beginnings of a new Scheme interpreter).
 
+Test Programmes
+---------------
+
+[`test_stdout_and_stderr`](https://github.com/jloughry/experiments/tree/master/test_stdout_and_stderr#readme)
+is a small test programme to verify that stderr gets properly redirected when
+the idiom `... >> logfile 2>&1` is used in a shell script that gets called
+from **cron**.
+
 TODO
 ----
 
