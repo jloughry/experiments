@@ -1,1 +1,1 @@
-begin Scheme_kata collection; update README
+added utility programme to test redirection of stdout and stderr when called from crontab
