@@ -121,6 +121,8 @@ J_kata
 
 This is a series of *kata*-type exercises in Java. So far, they consist of:
 
+-[`logic`](https://github.com/jloughry/experiments/tree/master/J_kata/logic/)
+*the difference between programmers and human beings*
 -[`rdp`](https://github.com/jloughry/experiments/tree/master/J_kata/rdp/)
 *recursive descent parser* (the beginnings of a Scheme interpreter).
 
