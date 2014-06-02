@@ -126,6 +126,14 @@ This is a series of *kata*-type exercises in Java. So far, they consist of:
 -[`rdp`](https://github.com/jloughry/experiments/tree/master/J_kata/rdp/)
 *recursive descent parser* (the beginnings of a Scheme interpreter).
 
+Perl_kata
+---------
+
+Useful moves in Perl:
+
+-[`formatted_elapsed_time`](https://github.com/jloughry/experiments/tree/master/Perl_kata/formatted_elapsed_time/)
+*call Perl in a shell script to format seconds as days, hours, minutes, seconds*
+
 Scheme_kata
 -----------
 
