@@ -1,1 +1,1 @@
-added Perl katas
+added a new Java kata: causing a null pointer exception on purpose
