@@ -1,2 +1,2 @@
-working on a syntax highlighter for Scheme, based in part on the Wikipedia article "Recursive
-descent parser", with extensions.
+scheme_syntax_highlighter is starting to work; still have to figure out how to
+<expression> = <constant> | <variable>
