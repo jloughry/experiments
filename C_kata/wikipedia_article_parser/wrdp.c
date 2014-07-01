@@ -2,7 +2,7 @@
 
 This is the grammar from the Wikipedia article on "Recursive Descent Parser".
 
-program = block "." .
+programme = block "." .
  
 block =
 	["const" ident "=" number {"," ident "=" number} ";"]
@@ -39,7 +39,7 @@ factor =
 enum symbols { ident, number, lparen, rparen, times, slash, plus, minus,
 	eql, neq, lss, leq, gtr, geq, callsym, beginsym, semicolon, endsym,
 	ifsym, whilesym, becomes, thensym, dosym, constsym, comma, varsym,
-	procsym, period, oddsym
+	procsym, period, oddsym,
 };
 
 typedef enum symbols Symbol;
@@ -49,10 +49,36 @@ Symbol sym;	/* global variable */
 void getsym (void);
 void error (const char * message);
 void expression (void);
+int accept(Symbol s);
+int expect(Symbol s);
+void display_symbol (Symbol s);
+void factor(void);
+void term(void);
+void expression(void);
+void condition(void);
+void statement(void);
+void block(void);
+void programme(void);
 
+/*
+There is an example programme encoded inside this simple version of the getsym()
+function:
+
+const a = 1, b=2;
+var x, y;
+
+while 1 = 1 do
+	y := y - 1.
+
+*/
 void getsym (void) {
 	static int i = 0;
-	Symbol symbol_list[] = { varsym, ident, comma, semicolon, ident, becomes, number, semicolon, period };
+	Symbol symbol_list[] = {
+		constsym, ident, eql, number, comma, ident, eql, number, semicolon,
+		varsym, ident, comma, ident, semicolon,
+			whilesym, ident, eql, number, dosym,
+				ident, becomes, ident, minus, number, period,
+	};
 	
 	sym = symbol_list[i++];
 }
@@ -74,7 +100,103 @@ int expect (Symbol s) {
 		return 1;
 	}
 	error("expect: unexpected symbol");
+	display_symbol(s);
 	return 0;
+}
+
+void display_symbol (Symbol s) {
+	switch (s) {
+		case ident:
+			printf("ident\n");
+			break;
+		case number:
+			printf("number\n");
+			break;
+		case lparen:
+			printf("lparen\n");
+			break;
+		case rparen:
+			printf("rparen\n");
+			break;
+		case times:
+			printf("times\n");
+			break;
+		case slash:
+			printf("slash\n");
+			break;
+		case plus:
+			printf("plus\n");
+			break;
+		case minus:
+			printf("minus\n");
+			break;
+		case eql:
+			printf("eql\n");
+			break;
+		case neq:
+			printf("neq\n");
+			break;
+		case lss:
+			printf("lss\n");
+			break;
+		case leq:
+			printf("leq\n");
+			break;
+		case gtr:
+			printf("gtr\n");
+			break;
+		case geq:
+			printf("geq\n");
+			break;
+		case callsym:
+			printf("callsym\n");
+			break;
+		case beginsym:
+			printf("beginsym\n");
+			break;
+		case semicolon:
+			printf("semicolon\n");
+			break;
+		case endsym:
+			printf("endsym\n");
+			break;
+		case ifsym:
+			printf("ifsym\n");
+			break;
+		case whilesym:
+			printf("whilesym\n");
+			break;
+		case becomes:
+			printf("becomes\n");
+			break;
+		case thensym:
+			printf("thensym\n");
+			break;
+		case dosym:
+			printf("dosym\n");
+			break;
+		case constsym:
+			printf("constsym\n");
+			break;
+		case comma:
+			printf("comma\n");
+			break;
+		case varsym:
+			printf("varsym\n");
+			break;
+		case procsym:
+			printf("procsym\n");
+			break;
+		case period:
+			printf("period\n");
+			break;
+		case oddsym:
+			printf("oddsym\n");
+			break;
+		default:
+			printf("Error in display_symbol(): unknown symbol %d\n", s);
+			break;
+	}
 }
  
 void factor (void) {
@@ -184,14 +306,14 @@ void block (void) {
 	statement();
 }
  
-void program (void) {
+void programme (void) {
 	getsym();
 	block();
 	expect(period);
 }
 
 int main (void) {
-	program();
+	programme();
 
 	return EXIT_SUCCESS;
 }

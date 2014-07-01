@@ -1,1 +1,2 @@
-added a new Java kata: causing a null pointer exception on purpose
+wikipedia_article_parser is working
+I still don't completely understand the syntax of begin/end blocks, though.
