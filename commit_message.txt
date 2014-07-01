@@ -1,2 +1,2 @@
-wikipedia_article_parser is working
-I still don't completely understand the syntax of begin/end blocks, though.
+working on a syntax highlighter for Scheme, based in part on the Wikipedia article "Recursive
+descent parser", with extensions.

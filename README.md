@@ -99,6 +99,8 @@ This is a series of *kata* type exercises in C. So far, the working ones are:
 *Shell sort*
 - [`rdp`](https://github.com/jloughry/experiments/tree/master/C_kata/rdp/)
 *recursive descent parser* (beginnings of a Scheme interpreter)
+- [`scheme_syntax_highlighter`](https://github.com/jloughry/experiments/tree/master/C_kata/scheme_syntax_highlighter/)
+*the beginnings of a syntax highlighter for Scheme* (based on `wikipedia_article_parser`)
 - [`simple_repl`](https://github.com/jloughry/experiments/tree/master/C_kata/simple_repl/)
 *read-eval-print loop*
 - [`sort`](https://github.com/jloughry/experiments/tree/master/C_kata/sort/)
@@ -106,6 +108,8 @@ This is a series of *kata* type exercises in C. So far, the working ones are:
 - [`stack`](https://github.com/jloughry/experiments/tree/master/C_kata/stack/)
 *an extensible stack implementation using linked lists* (also implements a queue
 using a pair of stacks, the second demo problem from [interviewcake.com](http://interviewcake.com)).
+- [`wikipedia_article_parser`](https://github.com/jloughry/experiments/tree/master/C_kata/wikipedia_article_parser/)
+*from the Wikipedia article "Recursive_descent_parser"*
 
 All of these are working and reasonably complete; all memory allocated is freed, and
 no global variables are used. The code is fairly functional in design. Things are mostly
@@ -115,6 +119,16 @@ and destroyed when no longer needed. Thread safety is not considered. In the `ha
 
 The style used throughout, with the exception of `assert()`, is pedantic. Cleverness is
 eschewed in favour of clarity and reliability.
+
+TODO
+====
+
+The `wikipedia_article_parser` is working, but needs be extended to parse names of
+identifiers and remember them; in addition, for doing proper syntax highlighting,
+it needs to not merely parse comments as spaces but parse them as units and remember
+the contents of the comment so it can be syntax-highlighted in the proper place in
+the output. Make a copy of the working `wikipedia_article_parser` and call it
+`scheme_syntax_highlighter` to start with.
 
 J_kata
 ------
