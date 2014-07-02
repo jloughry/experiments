@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-enum symbols { lparen, rparen, definesym, identsym, digitsym,
+enum symbols { lparen, rparen, definesym, identsym, numbersym, lambdasym,
 };
 
 typedef enum symbols Symbol;
@@ -20,6 +20,8 @@ void form(void);
 void definition(void);
 void variable_definition(void);
 void expression(void);
+void formals(void);
+void body(void);
 void constant(void);
 void variable(void);
 void number(void);
@@ -29,14 +31,23 @@ void programme(void);
 There is an example programme encoded inside this simple version of the getsym()
 function:
 
-(define x 1)
+(define x
+	(lambda (l)
+		0))
 
+(define length
+	(lambda (l)
+		(if (null? l)	; this is a comment
+			0
+			(+ 1 (length (cdr l))))))
 */
 
 void getsym (void) {
 	static int i = 0;
 	Symbol symbol_list[] = {
-		lparen, definesym, identsym, digitsym, rparen,
+		lparen, definesym, identsym,
+			lparen, lambdasym, lparen, identsym, rparen,
+				numbersym, rparen, rparen,
 	};
 	
 	sym = symbol_list[i++];
@@ -68,8 +79,8 @@ void display_symbol (Symbol s) {
 		case identsym:
 			printf("identsym\n");
 			break;
-		case digitsym:
-			printf("digitsym\n");
+		case numbersym:
+			printf("numbersym\n");
 			break;
 		case lparen:
 			printf("lparen\n");
@@ -79,6 +90,9 @@ void display_symbol (Symbol s) {
 			break;
 		case definesym:
 			printf("definesym\n");
+			break;
+		case lambdasym:
+			printf("lambdasym\n");
 			break;
 		default:
 			printf("Error in display_symbol(): unknown symbol %d\n", s);
@@ -97,7 +111,7 @@ void identifier(void) {
 }
 
 void number(void) {
-	if (accept(digitsym)) {
+	if (accept(numbersym)) {
 		;
 	}
 	else {
@@ -113,9 +127,27 @@ void constant(void) {
 void variable(void) {
 	identifier();
 }
+
+void formals(void) {
+	expect(lparen);
+	expect(identsym);
+	expect(rparen);
+}
+
+void body(void) {
+	expect(lparen);
+	expression();
+	expect(rparen);
+}
  
 void expression (void) {
-	if (accept(digitsym)) {
+	if (accept(lparen)) {
+		expect(lambdasym);
+		formals();
+		body();
+		expect(rparen);
+	}
+	else if (accept(numbersym)) {
 		;
 	}
 	else if (accept(identsym)) {

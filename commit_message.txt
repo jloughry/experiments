@@ -1,2 +1,1 @@
-scheme_syntax_highlighter is starting to work; still have to figure out how to
-<expression> = <constant> | <variable>
+scheme_syntax_highlighter extended for lambda expressions, but not working.
