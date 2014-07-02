@@ -1,1 +1,1 @@
-lambda expressions are working in scheme_syntax_highlighter
+trace function calls through parsing

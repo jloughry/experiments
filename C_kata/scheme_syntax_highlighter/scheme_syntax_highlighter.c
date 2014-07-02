@@ -4,7 +4,9 @@
 #include <string.h>
 
 #ifdef DEBUG
-	#define LOG(message) do { fprintf(stderr, "%s\n", message); } while (0)
+	#define LOG(message) do { fprintf(stdout, "%s\n", message); } while (0)
+#else
+	#define LOG(message)
 #endif
 
 enum symbols { lparen, rparen, definesym, identsym, numbersym, lambdasym,
@@ -30,6 +32,7 @@ void constant(void);
 void variable(void);
 void number(void);
 void programme(void);
+void emit(Symbol s);
 
 /*
 There is an example programme encoded inside this simple version of the getsym()
@@ -135,21 +138,21 @@ void variable(void) {
 }
 
 void formals(void) {
-	LOG("          entering formals()");
+	LOG("entering formals()");
 	expect(lparen);
 	expect(identsym);
 	expect(rparen);
-	LOG("          leaving formals()");
+	LOG("leaving formals()");
 }
 
 void body(void) {
-	LOG("          entering body()");
+	LOG("entering body()");
 	expression();
-	LOG("          leaving body()");
+	LOG("leaving body()");
 }
  
 void expression (void) {
-	LOG("        entering expression()");
+	LOG("entering expression()");
 	if (accept(lparen)) {
 		expect(lambdasym);
 		formals();
@@ -166,29 +169,29 @@ void expression (void) {
 		error("expression: syntax error");
 		getsym();
 	}
-	LOG("        leaving expression()");
+	LOG("leaving expression()");
 }
 
 void variable_definition (void) {
-	LOG("      entering variable_definition()");
+	LOG("entering variable_definition()");
 	expect(lparen);
 	expect(definesym);
 	expect(identsym);
 	expression();
 	expect(rparen);
-	LOG("      leaving variable_definition()");
+	LOG("leaving variable_definition()");
 }
 
 void definition (void) {
-	LOG("    entering definition()");
+	LOG("entering definition()");
 	variable_definition(); /* ultimately, this will have more */
-	LOG("    leaving definition()");
+	LOG("leaving definition()");
 }
 
 void form (void) {
-	LOG("  entering form()");
+	LOG("entering form()");
 	definition(); /* ultimately, this will be <definition>|<expression> */
-	LOG("  leaving form()");
+	LOG("leaving form()");
 }
 
 void programme (void) {
@@ -196,6 +199,29 @@ void programme (void) {
 	getsym();
 	form(); /* ultimately, this will be <form>* but for now it's just <form> */
 	LOG("leaving programme()");
+}
+
+void emit (Symbol s) {
+	switch (s) {
+		case lparen:
+			printf("<span class=\"punct\">(</span>");
+			break;
+		case rparen:
+			printf("<span class=\"punct\">)</span>");
+			break;
+		case identsym:
+			printf("span class=\"identifier\">identifier</span>");
+			break;
+		case definesym:
+			printf("span class=\"keyword\">define</span>");
+			break;
+		case lambdasym:
+			printf("span class=\"keyword\">lambda</span>");
+			break;
+		default:
+			printf("Error in emit(): unknown symbol %d\n", s);
+			break;
+	}
 }
 
 int main (void) {
