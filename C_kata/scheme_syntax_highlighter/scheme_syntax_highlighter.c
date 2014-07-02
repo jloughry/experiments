@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef DEBUG
+	#define LOG(message) do { fprintf(stderr, "%s\n", message); } while (0)
+#endif
+
 enum symbols { lparen, rparen, definesym, identsym, numbersym, lambdasym,
 };
 
@@ -30,6 +34,8 @@ void programme(void);
 /*
 There is an example programme encoded inside this simple version of the getsym()
 function:
+
+(define x 1)
 
 (define x
 	(lambda (l)
@@ -129,18 +135,21 @@ void variable(void) {
 }
 
 void formals(void) {
+	LOG("          entering formals()");
 	expect(lparen);
 	expect(identsym);
 	expect(rparen);
+	LOG("          leaving formals()");
 }
 
 void body(void) {
-	expect(lparen);
+	LOG("          entering body()");
 	expression();
-	expect(rparen);
+	LOG("          leaving body()");
 }
  
 void expression (void) {
+	LOG("        entering expression()");
 	if (accept(lparen)) {
 		expect(lambdasym);
 		formals();
@@ -157,27 +166,36 @@ void expression (void) {
 		error("expression: syntax error");
 		getsym();
 	}
+	LOG("        leaving expression()");
 }
 
 void variable_definition (void) {
+	LOG("      entering variable_definition()");
 	expect(lparen);
 	expect(definesym);
 	expect(identsym);
 	expression();
 	expect(rparen);
+	LOG("      leaving variable_definition()");
 }
 
 void definition (void) {
+	LOG("    entering definition()");
 	variable_definition(); /* ultimately, this will have more */
+	LOG("    leaving definition()");
 }
 
 void form (void) {
+	LOG("  entering form()");
 	definition(); /* ultimately, this will be <definition>|<expression> */
+	LOG("  leaving form()");
 }
 
 void programme (void) {
+	LOG("entering programme()");
 	getsym();
 	form(); /* ultimately, this will be <form>* but for now it's just <form> */
+	LOG("leaving programme()");
 }
 
 int main (void) {

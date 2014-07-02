@@ -1,1 +1,1 @@
-scheme_syntax_highlighter extended for lambda expressions, but not working.
+lambda expressions are working in scheme_syntax_highlighter
