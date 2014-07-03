@@ -1,1 +1,2 @@
-trace function calls through parsing
+scheme_syntax_highlighter is almost accepting the complete programme; need to start remembering
+the names of variables with symbols to further debug

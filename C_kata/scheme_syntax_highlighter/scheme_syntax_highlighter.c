@@ -9,7 +9,7 @@
 	#define LOG(message)
 #endif
 
-enum symbols { lparen, rparen, definesym, identsym, numbersym, lambdasym,
+enum symbols { lparen, rparen, definesym, variablesym, numbersym, lambdasym, ifsym,
 };
 
 typedef enum symbols Symbol;
@@ -38,12 +38,6 @@ void emit(Symbol s);
 There is an example programme encoded inside this simple version of the getsym()
 function:
 
-(define x 1)
-
-(define x
-	(lambda (l)
-		0))
-
 (define length
 	(lambda (l)
 		(if (null? l)	; this is a comment
@@ -54,9 +48,13 @@ function:
 void getsym (void) {
 	static int i = 0;
 	Symbol symbol_list[] = {
-		lparen, definesym, identsym,
-			lparen, lambdasym, lparen, identsym, rparen,
-				numbersym, rparen, rparen,
+		lparen, definesym, variablesym,
+			lparen, lambdasym, lparen, variablesym, rparen,
+				lparen, ifsym, lparen, variablesym, variablesym, rparen,
+					numbersym,
+					lparen, variablesym, numbersym, lparen, variablesym,
+						lparen, variablesym, variablesym, rparen,
+						rparen, rparen, rparen, rparen, rparen,
 	};
 	
 	sym = symbol_list[i++];
@@ -85,8 +83,8 @@ int expect (Symbol s) {
 
 void display_symbol (Symbol s) {
 	switch (s) {
-		case identsym:
-			printf("identsym\n");
+		case variablesym:
+			printf("variablesym\n");
 			break;
 		case numbersym:
 			printf("numbersym\n");
@@ -103,6 +101,9 @@ void display_symbol (Symbol s) {
 		case lambdasym:
 			printf("lambdasym\n");
 			break;
+		case ifsym:
+			printf("ifsym\n");
+			break;
 		default:
 			printf("Error in display_symbol(): unknown symbol %d\n", s);
 			break;
@@ -110,7 +111,7 @@ void display_symbol (Symbol s) {
 }
 
 void identifier(void) {
-	if (accept(identsym)) {
+	if (accept(variablesym)) {
 		;
 	}
 	else {
@@ -140,7 +141,7 @@ void variable(void) {
 void formals(void) {
 	LOG("entering formals()");
 	expect(lparen);
-	expect(identsym);
+	expect(variablesym);
 	expect(rparen);
 	LOG("leaving formals()");
 }
@@ -154,16 +155,29 @@ void body(void) {
 void expression (void) {
 	LOG("entering expression()");
 	if (accept(lparen)) {
-		expect(lambdasym);
-		formals();
-		body();
+		if (accept(lambdasym)) {
+			LOG("it's a lambda");
+			formals();
+			body();
+		}
+		else if (accept(ifsym)) {
+			LOG("it's an if");
+			expression();
+			expression();
+			expression(); /* the third expression should really be optional here */
+		}
+		else if (accept(variablesym)) {
+			LOG("it's an application");
+			while (accept(variablesym))
+				LOG("  argument");
+		}
 		expect(rparen);
 	}
 	else if (accept(numbersym)) {
-		;
+		LOG ("it's a number");
 	}
-	else if (accept(identsym)) {
-		;
+	else if (accept(variablesym)) {
+		LOG ("it's a variable");
 	}
 	else {
 		error("expression: syntax error");
@@ -176,7 +190,7 @@ void variable_definition (void) {
 	LOG("entering variable_definition()");
 	expect(lparen);
 	expect(definesym);
-	expect(identsym);
+	expect(variablesym);
 	expression();
 	expect(rparen);
 	LOG("leaving variable_definition()");
@@ -209,7 +223,7 @@ void emit (Symbol s) {
 		case rparen:
 			printf("<span class=\"punct\">)</span>");
 			break;
-		case identsym:
+		case variablesym:
 			printf("span class=\"identifier\">identifier</span>");
 			break;
 		case definesym:
@@ -217,6 +231,9 @@ void emit (Symbol s) {
 			break;
 		case lambdasym:
 			printf("span class=\"keyword\">lambda</span>");
+			break;
+		case ifsym:
+			printf("span class=\"keyword\">if</span>");
 			break;
 		default:
 			printf("Error in emit(): unknown symbol %d\n", s);
