@@ -1,1 +1,1 @@
-scheme_syntax_highlighter now accepts the full programme and is beginning to emit HTML
+cleanup in scheme_syntax_highlighter
