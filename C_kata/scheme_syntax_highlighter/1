@@ -1,0 +1,3 @@
+gcc -o scheme_syntax_highlighter.exe -Wall -Wunreachable-code -Werror -DDEBUG scheme_syntax_highlighter.c
+Makefile:20: recipe for target 'scheme_syntax_highlighter.exe' failed
+2: No such file or directory

@@ -12,15 +12,20 @@
 enum symbols { lparen, rparen, definesym, variablesym, numbersym, lambdasym, ifsym,
 };
 
-typedef enum symbols Symbol;
+struct symbol {
+	enum symbols kind;
+	char * name;
+};
+
+typedef struct symbol Symbol;
  
 Symbol sym;	/* global variable */
 
 void getsym (void);
 void error (const char * message);
 void expression (void);
-int accept(Symbol s);
-int expect(Symbol s);
+int accept(enum symbols s);
+int expect(enum symbols s);
 void display_symbol (Symbol s);
 void form(void);
 void definition(void);
@@ -32,7 +37,7 @@ void constant(void);
 void variable(void);
 void number(void);
 void programme(void);
-void emit(Symbol s);
+void emit_html(enum symbols type, char * name);
 
 /*
 There is an example programme encoded inside this simple version of the getsym()
@@ -48,13 +53,15 @@ function:
 void getsym (void) {
 	static int i = 0;
 	Symbol symbol_list[] = {
-		lparen, definesym, variablesym,
-			lparen, lambdasym, lparen, variablesym, rparen,
-				lparen, ifsym, lparen, variablesym, variablesym, rparen,
-					numbersym,
-					lparen, variablesym, numbersym, lparen, variablesym,
-						lparen, variablesym, variablesym, rparen,
-						rparen, rparen, rparen, rparen, rparen,
+		{lparen, NULL}, {definesym, NULL}, {variablesym, "length"},
+			{lparen, NULL}, {lambdasym, NULL}, {lparen, NULL}, {variablesym, "l"}, {rparen, NULL},
+				{lparen, NULL}, {ifsym, NULL}, {lparen, NULL}, {variablesym, "null?"},
+				{variablesym, "l"}, {rparen, NULL},
+				{numbersym, "0"},
+				{lparen, NULL}, {variablesym, "+"}, {numbersym, "1"}, {lparen, NULL},
+				{variablesym, "length"}, {lparen, NULL}, {variablesym, "cdr"}, {variablesym, "l"},
+				{rparen, NULL}, {rparen, NULL}, {rparen, NULL}, {rparen, NULL}, {rparen, NULL},
+				{rparen, NULL},
 	};
 	
 	sym = symbol_list[i++];
@@ -64,30 +71,30 @@ void error (const char * message) {
 	fprintf (stderr, "Error: %s\n", message);
 }
  
-int accept (Symbol s) {
-	if (sym == s) {
+int accept (enum symbols s) {
+	if (sym.kind == s) {
 		getsym();
 		return 1;
 	}
 	return 0;
 }
  
-int expect (Symbol s) {
+int expect (enum symbols s) {
 	if (accept(s)) {
 		return 1;
 	}
 	error("expect: unexpected symbol");
-	display_symbol(s);
+	display_symbol(sym);
 	return 0;
 }
 
 void display_symbol (Symbol s) {
-	switch (s) {
+	switch (s.kind) {
 		case variablesym:
-			printf("variablesym\n");
+			printf("variablesym: name = \"%s\"\n", s.name);
 			break;
 		case numbersym:
-			printf("numbersym\n");
+			printf("numbersym: name = \"%s\"\n", s.name);
 			break;
 		case lparen:
 			printf("lparen\n");
@@ -105,7 +112,7 @@ void display_symbol (Symbol s) {
 			printf("ifsym\n");
 			break;
 		default:
-			printf("Error in display_symbol(): unknown symbol %d\n", s);
+			printf("Error in display_symbol(): unknown symbol %d (\"%s\")\n", s.kind, s.name);
 			break;
 	}
 }
@@ -156,28 +163,27 @@ void expression (void) {
 	LOG("entering expression()");
 	if (accept(lparen)) {
 		if (accept(lambdasym)) {
-			LOG("it's a lambda");
 			formals();
 			body();
 		}
 		else if (accept(ifsym)) {
-			LOG("it's an if");
 			expression();
 			expression();
 			expression(); /* the third expression should really be optional here */
 		}
-		else if (accept(variablesym)) {
-			LOG("it's an application");
-			while (accept(variablesym))
-				LOG("  argument");
+		else while (sym.kind == variablesym || sym.kind == numbersym || sym.kind == lparen) {
+			getsym();
+			if (sym.kind == rparen)
+				break;
+			expression();
 		}
 		expect(rparen);
 	}
 	else if (accept(numbersym)) {
-		LOG ("it's a number");
+		;
 	}
 	else if (accept(variablesym)) {
-		LOG ("it's a variable");
+		;
 	}
 	else {
 		error("expression: syntax error");
@@ -188,11 +194,11 @@ void expression (void) {
 
 void variable_definition (void) {
 	LOG("entering variable_definition()");
-	expect(lparen);
-	expect(definesym);
+	expect(lparen); emit_html(lparen, "(");
+	expect(definesym); emit_html(definesym, "define");
 	expect(variablesym);
 	expression();
-	expect(rparen);
+	expect(rparen); emit_html(rparen, ")");
 	LOG("leaving variable_definition()");
 }
 
@@ -215,28 +221,26 @@ void programme (void) {
 	LOG("leaving programme()");
 }
 
-void emit (Symbol s) {
-	switch (s) {
+void emit_html(enum symbols type, char * name) {
+	switch (type) {
 		case lparen:
-			printf("<span class=\"punct\">(</span>");
-			break;
 		case rparen:
-			printf("<span class=\"punct\">)</span>");
+			printf("<span class=\"punct\">%s</span>", name);
 			break;
 		case variablesym:
-			printf("span class=\"identifier\">identifier</span>");
+			printf("<span class=\"identifier\">%s</span>", name);
+			break;
+		case numbersym:
+			printf("<span class=\"constant\">%s</span>", name);
 			break;
 		case definesym:
-			printf("span class=\"keyword\">define</span>");
-			break;
-		case lambdasym:
-			printf("span class=\"keyword\">lambda</span>");
-			break;
 		case ifsym:
-			printf("span class=\"keyword\">if</span>");
+		case lambdasym:
+			printf("<span class=\"keyword\">%s</span>", name);
 			break;
 		default:
-			printf("Error in emit(): unknown symbol %d\n", s);
+			fprintf(stderr, "emit_html() encountered an unknown type (%d) [name = \"%s\"]\n",
+				type, name);
 			break;
 	}
 }
