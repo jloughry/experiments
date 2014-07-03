@@ -1,0 +1,2 @@
+The next thing to do is make the parser handle comments so the syntax highlighter
+can get to them.

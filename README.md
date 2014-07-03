@@ -101,6 +101,8 @@ This is a series of *kata* type exercises in C. So far, the working ones are:
 *recursive descent parser* (beginnings of a Scheme interpreter)
 - [`scheme_syntax_highlighter`](https://github.com/jloughry/experiments/tree/master/C_kata/scheme_syntax_highlighter/)
 *the beginnings of a syntax highlighter for Scheme* (based on `wikipedia_article_parser`)
+TODO: parse comments as if they were a chunked variable; this will allow the syntax
+highlighter to get at their contents.
 - [`simple_repl`](https://github.com/jloughry/experiments/tree/master/C_kata/simple_repl/)
 *read-eval-print loop*
 - [`sort`](https://github.com/jloughry/experiments/tree/master/C_kata/sort/)

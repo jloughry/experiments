@@ -1,1 +1,1 @@
-cleanup in scheme_syntax_highlighter
+update README with TODO
