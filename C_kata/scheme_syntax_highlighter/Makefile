@@ -17,7 +17,7 @@ all:: $(executable)
 #
 
 $(executable): $(target).c Makefile
-	$(CC) -o $@ $(CFLAGS) $(PROD_FLAGS) $<
+	$(CC) -o $@ $(CFLAGS) $(DEBUG_FLAGS) $<
 
 test: $(executable)
 	./$<

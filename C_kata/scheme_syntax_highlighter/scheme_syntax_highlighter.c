@@ -9,7 +9,8 @@
 	#define LOG(message)
 #endif
 
-enum symbols { lparen, rparen, definesym, variablesym, numbersym, lambdasym, ifsym,
+enum symbols { lparen, rparen, definesym, variablesym, numbersym, lambdasym,
+	ifsym, commentsym,
 };
 
 struct symbol {
@@ -38,6 +39,7 @@ void constant(void);
 void variable(void);
 void number(void);
 void programme(void);
+
 void emit_html(enum symbols type, char * name);
 void syntax_multiline_block(void);
 void end_syntax_multiline_block(void);
@@ -61,7 +63,7 @@ void getsym (void) {
 		{lparen, NULL}, {definesym, NULL}, {variablesym, "length"},
 			{lparen, NULL}, {lambdasym, NULL}, {lparen, NULL}, {variablesym, "l"}, {rparen, NULL},
 				{lparen, NULL}, {ifsym, NULL}, {lparen, NULL}, {variablesym, "null?"},
-				{variablesym, "l"}, {rparen, NULL},
+				{variablesym, "l"}, {rparen, NULL}, {commentsym, "; this is a comment"},
 				{numbersym, "0"},
 				{lparen, NULL}, {variablesym, "+"}, {numbersym, "1"}, {lparen, NULL},
 				{variablesym, "length"}, {lparen, NULL}, {variablesym, "cdr"}, {variablesym, "l"},
@@ -78,7 +80,11 @@ void error (const char * message) {
 }
  
 int accept (enum symbols s) {
+	while (sym.kind == commentsym) {
+		getsym();
+	}
 	if (sym.kind == s) {
+		
 		getsym();
 		return 1;
 	}
@@ -89,7 +95,7 @@ int expect (enum symbols s) {
 	if (accept(s)) {
 		return 1;
 	}
-	error("expect: unexpected symbol");
+	error("expect: unexpected symbol...got ");
 	display_symbol(sym);
 	return 0;
 }
@@ -116,6 +122,9 @@ void display_symbol (Symbol s) {
 			break;
 		case ifsym:
 			printf("ifsym\n");
+			break;
+		case commentsym:
+			printf("commentsym: name = \"%s\"\n", s.name);
 			break;
 		default:
 			printf("Error in display_symbol(): unknown symbol %d (\"%s\")\n", s.kind, s.name);
@@ -153,9 +162,9 @@ void variable(void) {
 
 void formals(void) {
 	LOG("entering formals()");
-	expect(lparen); emit_html(lparen, "(");
-	expect(variablesym); emit_html(variablesym, oldsym.name);
-	expect(rparen); emit_html(rparen, ")");
+	expect(lparen);
+	expect(variablesym);
+	expect(rparen);
 	LOG("leaving formals()");
 }
 
@@ -167,41 +176,30 @@ void body(void) {
  
 void expression (void) {
 	LOG("entering expression()");
-	if (accept(lparen)) { emit_html(lparen, "(");
-		if (accept(lambdasym)) { emit_html(lambdasym, "lambda");
+	if (accept(lparen)) {
+		if (accept(lambdasym)) {
 			formals();
-			syntax_multiline_block();
 			body();
-			end_syntax_multiline_block();
 		}
-		else if (accept(ifsym)) { emit_html(ifsym, "if");
+		else if (accept(ifsym)) {
 			expression();
 			expression();
 			expression(); /* the third expression should really be optional here */
 		}
 		else while (sym.kind == variablesym || sym.kind == numbersym || sym.kind == lparen) {
-			if (sym.kind == lparen) {
-				syntax_same_line_block();
-				emit_html(lparen, "(");
-			}
-			else {
-				emit_html(sym.kind, sym.name);
-			}
 			getsym();
 			if (sym.kind == rparen) {
-				emit_html(rparen, ")");
-				end_syntax_same_line_block();
 				break;
 			}
 			expression();
 		}
-		expect(rparen); emit_html(rparen, ")");
+		expect(rparen);
 	}
 	else if (accept(numbersym)) {
-		emit_html(numbersym, oldsym.name);
+		;
 	}
 	else if (accept(variablesym)) {
-		emit_html(variablesym, oldsym.name);
+		;
 	}
 	else {
 		error("expression: syntax error");
@@ -212,13 +210,11 @@ void expression (void) {
 
 void variable_definition (void) {
 	LOG("entering variable_definition()");
-	expect(lparen); emit_html(lparen, "(");
-	expect(definesym); emit_html(definesym, "define");
-	expect(variablesym); emit_html(variablesym, oldsym.name);
-	syntax_multiline_block();
+	expect(lparen);
+	expect(definesym);
+	expect(variablesym);
 	expression();
-	expect(rparen); emit_html(rparen, ")");
-	end_syntax_multiline_block();
+	expect(rparen);
 	LOG("leaving variable_definition()");
 }
 
@@ -237,12 +233,7 @@ void form (void) {
 void programme (void) {
 	LOG("entering programme()");
 	getsym();
-	printf("<div id=\"syntax-highlighting-test-3\">");
-	printf("<div class=\"code\">");
-	syntax_multiline_block();
 	form(); /* ultimately, this will be <form>* but for now it's just <form> */
-	end_syntax_multiline_block();
-	printf("</div>");
 	LOG("leaving programme()");
 }
 

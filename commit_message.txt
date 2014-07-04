@@ -1,1 +1,1 @@
-syntax-highlighting-test-3 in scheme_syntax_highlighter.c is almost working, but one rparen and three closing </div>s are being lost
+take out emit_html until I get the parser to implement more of the grammar; added symbol for comments
