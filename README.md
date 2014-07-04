@@ -139,6 +139,8 @@ This is a series of *kata*-type exercises in Java. So far, they consist of:
 
 -[`logic`](https://github.com/jloughry/experiments/tree/master/J_kata/logic/)
 *the difference between programmers and human beings*
+-[`newtons_method`](https://github.com/jloughry/experiments/tree/master/J_kata/newtons_method/)
+*find the square root of a number using Newton-Rafson iteration (not quite)*
 -[`rdp`](https://github.com/jloughry/experiments/tree/master/J_kata/rdp/)
 *recursive descent parser* (the beginnings of a Scheme interpreter).
 
