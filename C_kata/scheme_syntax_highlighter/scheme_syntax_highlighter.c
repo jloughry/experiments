@@ -20,6 +20,7 @@ struct symbol {
 typedef struct symbol Symbol;
  
 Symbol sym;	/* global variable */
+Symbol oldsym;
 
 void getsym (void);
 void error (const char * message);
@@ -38,6 +39,10 @@ void variable(void);
 void number(void);
 void programme(void);
 void emit_html(enum symbols type, char * name);
+void syntax_multiline_block(void);
+void end_syntax_multiline_block(void);
+void syntax_same_line_block(void);
+void end_syntax_same_line_block(void);
 
 /*
 There is an example programme encoded inside this simple version of the getsym()
@@ -64,6 +69,7 @@ void getsym (void) {
 				{rparen, NULL},
 	};
 	
+	oldsym = sym;
 	sym = symbol_list[i++];
 }
 
@@ -147,9 +153,9 @@ void variable(void) {
 
 void formals(void) {
 	LOG("entering formals()");
-	expect(lparen);
-	expect(variablesym);
-	expect(rparen);
+	expect(lparen); emit_html(lparen, "(");
+	expect(variablesym); emit_html(variablesym, oldsym.name);
+	expect(rparen); emit_html(rparen, ")");
 	LOG("leaving formals()");
 }
 
@@ -161,29 +167,41 @@ void body(void) {
  
 void expression (void) {
 	LOG("entering expression()");
-	if (accept(lparen)) {
-		if (accept(lambdasym)) {
+	if (accept(lparen)) { emit_html(lparen, "(");
+		if (accept(lambdasym)) { emit_html(lambdasym, "lambda");
 			formals();
+			syntax_multiline_block();
 			body();
+			end_syntax_multiline_block();
 		}
-		else if (accept(ifsym)) {
+		else if (accept(ifsym)) { emit_html(ifsym, "if");
 			expression();
 			expression();
 			expression(); /* the third expression should really be optional here */
 		}
 		else while (sym.kind == variablesym || sym.kind == numbersym || sym.kind == lparen) {
+			if (sym.kind == lparen) {
+				syntax_same_line_block();
+				emit_html(lparen, "(");
+			}
+			else {
+				emit_html(sym.kind, sym.name);
+			}
 			getsym();
-			if (sym.kind == rparen)
+			if (sym.kind == rparen) {
+				emit_html(rparen, ")");
+				end_syntax_same_line_block();
 				break;
+			}
 			expression();
 		}
-		expect(rparen);
+		expect(rparen); emit_html(rparen, ")");
 	}
 	else if (accept(numbersym)) {
-		;
+		emit_html(numbersym, oldsym.name);
 	}
 	else if (accept(variablesym)) {
-		;
+		emit_html(variablesym, oldsym.name);
 	}
 	else {
 		error("expression: syntax error");
@@ -196,9 +214,11 @@ void variable_definition (void) {
 	LOG("entering variable_definition()");
 	expect(lparen); emit_html(lparen, "(");
 	expect(definesym); emit_html(definesym, "define");
-	expect(variablesym);
+	expect(variablesym); emit_html(variablesym, oldsym.name);
+	syntax_multiline_block();
 	expression();
 	expect(rparen); emit_html(rparen, ")");
+	end_syntax_multiline_block();
 	LOG("leaving variable_definition()");
 }
 
@@ -217,7 +237,12 @@ void form (void) {
 void programme (void) {
 	LOG("entering programme()");
 	getsym();
+	printf("<div id=\"syntax-highlighting-test-3\">");
+	printf("<div class=\"code\">");
+	syntax_multiline_block();
 	form(); /* ultimately, this will be <form>* but for now it's just <form> */
+	end_syntax_multiline_block();
+	printf("</div>");
 	LOG("leaving programme()");
 }
 
@@ -243,6 +268,22 @@ void emit_html(enum symbols type, char * name) {
 				type, name);
 			break;
 	}
+}
+
+void syntax_multiline_block(void) {
+	printf("<div class=\"syntax-multiline-block\">");
+}
+
+void end_syntax_multiline_block(void) {
+	printf("</div>");
+}
+
+void syntax_same_line_block(void) {
+	printf("<div class=\"syntax-same-line-block\">");
+}
+
+void end_syntax_same_line_block(void) {
+	printf("</div>");
 }
 
 int main (void) {

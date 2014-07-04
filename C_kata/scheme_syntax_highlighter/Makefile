@@ -5,7 +5,7 @@ executable = $(target).exe
 CC=gcc
 CFLAGS = -Wall -Wunreachable-code -Werror
 DEBUG_FLAGS = -DDEBUG
-PRODUCTION_FLAGS = -DNDEBUG
+PROD_FLAGS = -DNDEBUG
 editor = vi
 
 temporary_files = $(executable).stackdump consolidated_bibtex_file.bib
@@ -17,7 +17,7 @@ all:: $(executable)
 #
 
 $(executable): $(target).c Makefile
-	$(CC) -o $@ $(CFLAGS) $(DEBUG_FLAGS) $<
+	$(CC) -o $@ $(CFLAGS) $(PROD_FLAGS) $<
 
 test: $(executable)
 	./$<

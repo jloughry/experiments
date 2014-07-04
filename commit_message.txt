@@ -1,1 +1,1 @@
-update README with TODO
+syntax-highlighting-test-3 in scheme_syntax_highlighter.c is almost working, but one rparen and three closing </div>s are being lost
