@@ -1,1 +1,1 @@
-add Cory's code for debugging
+I suggested to Cory that he write a fake input method to avoid having to re-type the data every time.
