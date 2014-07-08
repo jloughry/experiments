@@ -137,13 +137,13 @@ J_kata
 
 This is a series of *kata*-type exercises in Java. So far, they consist of:
 
--[`logic`](https://github.com/jloughry/experiments/tree/master/J_kata/logic/)
+- [`logic`](https://github.com/jloughry/experiments/tree/master/J_kata/logic/)
 *the difference between programmers and human beings*
--[`newtons_method`](https://github.com/jloughry/experiments/tree/master/J_kata/newtons_method/)
+- [`newtons_method`](https://github.com/jloughry/experiments/tree/master/J_kata/newtons_method/)
 *find the square root of a number using Newton-Rafson iteration (not quite)*
--[`rdp`](https://github.com/jloughry/experiments/tree/master/J_kata/rdp/)
+- [`rdp`](https://github.com/jloughry/experiments/tree/master/J_kata/rdp/)
 *recursive descent parser* (the beginnings of a Scheme interpreter).
--[`temp`](https://github.com/jloughry/experiments/tree/master/J_kata/temp/)
+- [`temp`](https://github.com/jloughry/experiments/tree/master/J_kata/temp/)
 *Cory Morales's code* (TempoDB) to debug.
 
 Perl_kata
@@ -151,7 +151,7 @@ Perl_kata
 
 Useful moves in Perl:
 
--[`formatted_elapsed_time`](https://github.com/jloughry/experiments/tree/master/Perl_kata/formatted_elapsed_time/)
+- [`formatted_elapsed_time`](https://github.com/jloughry/experiments/tree/master/Perl_kata/formatted_elapsed_time/)
 *call Perl in a shell script to format seconds as days, hours, minutes, seconds*
 
 Scheme_kata
@@ -159,13 +159,13 @@ Scheme_kata
 
 More *kata*s in Scheme. So far, the set consist of:
 
--[`rdp`](https://github.com/jloughry/experiments/tree/master/Scheme_kata/rdp/)
+- [`rdp`](https://github.com/jloughry/experiments/tree/master/Scheme_kata/rdp/)
 *recursive descent parser* (the beginnings of a new Scheme interpreter).
 
 Test Programmes
 ---------------
 
-[`test_stdout_and_stderr`](https://github.com/jloughry/experiments/tree/master/test_stdout_and_stderr#readme)
+- [`test_stdout_and_stderr`](https://github.com/jloughry/experiments/tree/master/test_stdout_and_stderr#readme)
 is a small test programme to verify that stderr gets properly redirected when
 the idiom `... >> logfile 2>&1` is used in a shell script that gets called
 from **cron**.
