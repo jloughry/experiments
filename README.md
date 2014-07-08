@@ -143,6 +143,8 @@ This is a series of *kata*-type exercises in Java. So far, they consist of:
 *find the square root of a number using Newton-Rafson iteration (not quite)*
 -[`rdp`](https://github.com/jloughry/experiments/tree/master/J_kata/rdp/)
 *recursive descent parser* (the beginnings of a Scheme interpreter).
+-[`temp`](https://github.com/jloughry/experiments/tree/master/J_kata/temp/)
+*Cory Morales's code* (TempoDB) to debug.
 
 Perl_kata
 ---------

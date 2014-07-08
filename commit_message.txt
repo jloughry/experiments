@@ -1,1 +1,1 @@
-quick Java programme to do Newton-Rafson iteration
+add Cory's code for debugging
