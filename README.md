@@ -122,8 +122,7 @@ and destroyed when no longer needed. Thread safety is not considered. In the `ha
 The style used throughout, with the exception of `assert()`, is pedantic. Cleverness is
 eschewed in favour of clarity and reliability.
 
-TODO
-====
+### TODO
 
 The `wikipedia_article_parser` is working, but needs be extended to parse names of
 identifiers and remember them; in addition, for doing proper syntax highlighting,
@@ -169,6 +168,14 @@ Test Programmes
 is a small test programme to verify that stderr gets properly redirected when
 the idiom `... >> logfile 2>&1` is used in a shell script that gets called
 from **cron**.
+
+Drawings
+--------
+
+This is a place for drawings in SVG and PDF and PostScript.
+
+- [`TARDIS`](https://github.com/jloughry/experiments/tree/master/drawings/TARDIS#readme) contains
+drawings for M's new door.
 
 TODO
 ----
