@@ -13,3 +13,9 @@ Embedding Fonts in PDF in Inkscape
 Inkscape can write PDF files either with fonts embedded or with type converted to paths.
 The option is in the PDF "Save As..." dialogue.
 
+Converting Text to Paths
+------------------------
+
+For the sign making machine at [signaramadtc.com](signaramadtc.com), Sara Carlson
+asked me to convert text to outlines. I sent her new PDFs to check.
+

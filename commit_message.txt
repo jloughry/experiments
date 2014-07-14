@@ -1,1 +1,1 @@
-embed fonts in PDF files
+convert type to outlines for the sign cutting machine
