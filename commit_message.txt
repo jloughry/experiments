@@ -1,1 +1,1 @@
-convert type to outlines for the sign cutting machine
+some notes on defeating cryptographic hash fingerprinting of files

@@ -5,6 +5,12 @@ open research data
 
 This is a place for experiments.
 
+Fingerprint
+-----------
+
+Some notes on defeating cryptographic hash fingerprinting of files for the purpose
+of detecting particular versions.
+
 HTML_in_Scheme
 --------------
 
