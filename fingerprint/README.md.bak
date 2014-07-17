@@ -14,7 +14,7 @@ are more resistant to small random changes than others.
 
 If the binary file format contains an in-built check-sum, like some executable
 file formats do, then it may be necessary to update the check-sum after modification
-to ensure the check-sum is valid. The purpose, in general, is to disguise the file
+to ensure the checksum is valid. The purpose, in general, is to disguise the file
 from scanners whilst retaining the ability to open or use the file normally.
 
 Some graphics file formats, *e.g.*, GIF89a, are tolerant of data being inserted

@@ -1,1 +1,1 @@
-fix broken link (I hate Markdown)
+update readme for future experiments
