@@ -5,7 +5,7 @@ open research data
 
 This is a place for experiments.
 
-Fingerprint
+[Fingerprint](https://github.com/jloughry/experiments/fingerprint#readme)
 -----------
 
 Some notes on defeating cryptographic hash fingerprinting of files for the purpose

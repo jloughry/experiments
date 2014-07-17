@@ -1,1 +1,1 @@
-some notes on defeating cryptographic hash fingerprinting of files
+update readme with link to fingerprint experiment results
