@@ -1,4 +1,4 @@
-# some notes on defeating cryptographic hash fingerprinting to detect particular file versions.
+# Some notes on defeating cryptographic hash fingerprinting to detect particular file versions.
 
 One way of rapidly detecting the presence of particular files of interest
 (especially binary data files such as graphics or compiled programmes that

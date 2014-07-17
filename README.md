@@ -9,7 +9,7 @@ This is a place for experiments.
 ---
 
 Some notes on defeating cryptographic hash fingerprinting of files for the purpose
-of detecting particular versions.
+of detecting particular versions of those files.
 
 HTML_in_Scheme
 --------------
