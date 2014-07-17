@@ -5,8 +5,8 @@ open research data
 
 This is a place for experiments.
 
-[Fingerprint](https://github.com/jloughry/experiments/fingerprint#readme)
------------
+[Fingerprint](https://github.com/jloughry/experiments/blob/master/fingerprint/README.md)
+---
 
 Some notes on defeating cryptographic hash fingerprinting of files for the purpose
 of detecting particular versions.

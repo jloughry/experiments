@@ -1,1 +1,1 @@
-update readme with link to fingerprint experiment results
+fix broken link (I hate Markdown)
