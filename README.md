@@ -10,7 +10,7 @@ This is a place for experiments.
 Some notes on defeating cryptographic hash fingerprinting of files for the purpose
 of detecting particular versions of those files.
 
-## [fuzzy matching](https://github.com/jloughry/experiments/blob/master/fuzzy/README.md)
+## [fuzzy matching of licence plate numbers](https://github.com/jloughry/experiments/blob/master/fuzzy/README.md)
 
 Some notes on an algorithm for approximately matching licence plate numbers, ignoring
 commonly confused characters like "1" and "I" or "O" and "0".
