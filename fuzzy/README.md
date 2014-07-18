@@ -2,11 +2,18 @@
 
 Licence plate numbers, *e.g.*, may contain characters that are easily confused,
 especially in poor conditions, such as "1" and "I", or "O" and "0". To avoid
-false negatives, use a fuzzy matching algorithm like this:
+false negatives, use a fuzzy matching algorithm like
+[this](https://github.com/jloughry/experiments/blob/master/fuzzy/fuzzymatch.sh):
+
+````
+tr -dc "[:alnum:]" \
+tr "[:lower:]" "[:upper:]" \
+tr $regular_alphabet $strange_alphabet)
+````
 
 ## Implementation Notes
 
-First, ignore anything not in [A-Z][0-9] (in particular, dashes are ignored). Then
+First, ignore anything not in `[A-Z][0-9]` (in particular, dashes are ignored). Then
 convert the string to upper case. Finally, collapse commonly confused characters
 to a single representation, then match to the target after the same transformations
 have been made to it.

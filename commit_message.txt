@@ -1,1 +1,1 @@
-fuzzy match algorithm for licence plate numbers, where zero might be confused for "O"
+I hate Markdown (backquote regexp so it leaves the brackets alone)
