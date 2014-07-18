@@ -1,1 +1,1 @@
-update top level README
+fuzzy match algorithm for licence plate numbers, where zero might be confused for "O"
