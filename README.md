@@ -5,6 +5,11 @@ experiments
 
 This is a place for experiments.
 
+## [Benford's Law](https://github.com/jloughry/experiments/blob/master/Benfords_Law/README.md)
+
+An experiment showing how easy it is to tell the difference between "real" and "fake"
+data by looking at probability distribution functions.
+
 ## [Fingerprint](https://github.com/jloughry/experiments/blob/master/fingerprint/README.md)
 
 Some notes on defeating cryptographic hash fingerprinting of files for the purpose
