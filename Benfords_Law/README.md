@@ -37,7 +37,7 @@ zero digits were neither counted nor plotted in either data set
 
 ## Results
 
-Results of the analysis are shown in the figures:
+Results of the analysis are shown below:
 
 <table width="100%">
 <tr><td align="center">
@@ -45,7 +45,7 @@ Results of the analysis are shown in the figures:
 src="https://github.com/jloughry/notes.new/raw/master/graphics/real_data.png"
 alt="This is real data, collected from time spent writing weekly activity reports." width="300"/>
 </td>
-<td width="20%">&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td align="center">
 <a href="https://github.com/jloughry/notes/new/raw/master/graphics/fake_data.png"><img
 src="https://github.com/jloughry/notes.new/raw/master/graphics/fake_data.png"
@@ -56,7 +56,8 @@ alt="This is fake data, just random numbers in the interval [0,1000)." width="30
 ## Interpretation
 
 The `real_data` show a clear Benford's Law distribution; the `fake_data` show
-a uniform distribution, as expected.
+a uniform distribution, as expected. It is easy to distinguish the real data from
+the fake data, even with only 350 data points.
 
 ## Conclusions
 
