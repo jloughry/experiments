@@ -1,1 +1,1 @@
-improve spacing of table
+space out the figures so they don't run together
