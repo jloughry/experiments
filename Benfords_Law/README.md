@@ -53,6 +53,9 @@ alt="This is fake data, just random numbers in the interval [0,1000)." width="30
 </td><tr>
 </table>
 
+The plot of actual data appears on the left; on the right is fake data from a random
+number generator.
+
 ## Interpretation
 
 The `real_data` show a clear Benford's Law distribution; the `fake_data` show
