@@ -39,12 +39,14 @@ zero digits were neither counted nor plotted in either data set
 
 Results of the analysis are shown in the figures:
 
-<table border="1" width="100%">
+<table border="0" width="100%">
 <tr><td align="center">
 <a href="https://github.com/jloughry/notes/new/raw/master/graphics/real_data.png"><img
 src="https://github.com/jloughry/notes.new/raw/master/graphics/real_data.png"
 alt="This is real data, collected from time spent writing weekly activity reports." width="300"/>
-</td><td align="center">
+</td>
+<td>&nbsp;</td>
+<td align="center">
 <a href="https://github.com/jloughry/notes/new/raw/master/graphics/fake_data.png"><img
 src="https://github.com/jloughry/notes.new/raw/master/graphics/fake_data.png"
 alt="This is fake data, just random numbers in the interval [0,1000)." width="300"/>
