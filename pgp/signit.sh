@@ -6,9 +6,8 @@ IFS=$'\n\t'
 echo -n "Signing the clipboard..."
 
 /usr/local/bin/gpg2 \
-	-u 0xF8473D33 \
+	-u 0xEDC2ABE5 \
 	--personal-digest-preferences SHA256 --clearsign \
-	--no-secmem-warning \
 	< /dev/clipboard \
 	> /dev/clipboard && cat /dev/clipboard
 
