@@ -197,6 +197,13 @@ drawings for M's new door.
 
 A place for experiments with PGP (and GnuPG)
 
+Wake-On-Lan
+-----------
+
+- [wake_on_lan](https://github.com/jloughry/experiments/tree/master/wake_on_lan/#readme)
+contains Java code from [http://www.jibble.org/wake-on-lan/](http://www.jibble.org/wake-on-lan/)
+to send the necessary UDP packet to wake up a machine from sleep.
+
 TODO
 ----
 
