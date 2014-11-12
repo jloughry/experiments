@@ -1,7 +1,11 @@
 import java.io.*;
 import java.net.*;
 
-// Source: http://www.jibble.org/wake-on-lan/
+// Source of the original code: http://www.jibble.org/wake-on-lan/
+
+// The payload comprises six bytes of 0xFF followed by sixteen repetitions
+// of the target machine's MAC address, sent to the broadcast IP address on
+// the LAN.
 
 public class WakeOnLan {
     
@@ -11,8 +15,8 @@ public class WakeOnLan {
         
         if (args.length != 2) {
             System.out.println("Usage: java WakeOnLan <broadcast-ip> <mac-address>");
-            System.out.println("Example: java WakeOnLan 192.168.0.255 00:0D:61:08:22:4A");
-            System.out.println("Example: java WakeOnLan 192.168.0.255 00-0D-61-08-22-4A");
+			System.out.println("       IP address may be numeric or DNS; MAC address");
+			System.out.println("       should be delimited with colons or hyphens.");
             System.exit(1);
         }
         
@@ -35,20 +39,21 @@ public class WakeOnLan {
             socket.send(packet);
             socket.close();
             
-            System.out.println("Wake-on-LAN packet sent to " + macStr + " at " + ipStr + ".");
+            System.out.println("Wake-on-LAN packet sent to MAC " + macStr
+                + " via IP " + address.getHostAddress() + ".");
         }
         catch (Exception e) {
-            System.out.println("Failed to send Wake-on-LAN packet: + e");
+            System.out.println("Failed to send Wake-on-LAN packet: " + e);
             System.exit(1);
         }
-        
     }
     
     private static byte[] getMacBytes(String macStr) throws IllegalArgumentException {
         byte[] bytes = new byte[6];
         String[] hex = macStr.split("(\\:|\\-)");
         if (hex.length != 6) {
-            throw new IllegalArgumentException("Invalid MAC address.");
+            throw new IllegalArgumentException("\"" + macStr + "\""
+                + " is not the right length to be a MAC address.");
         }
         try {
             for (int i = 0; i < 6; i++) {
@@ -60,6 +65,5 @@ public class WakeOnLan {
         }
         return bytes;
     }
-    
 }
 
