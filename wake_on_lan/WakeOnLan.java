@@ -39,7 +39,7 @@ public class WakeOnLan {
             socket.send(packet);
             socket.close();
             
-            System.out.println("Wake-on-LAN packet sent to MAC " + macStr
+            System.out.println("Wake-on-LAN packet sent to MAC addr " + macStr
                 + " via IP " + address.getHostAddress() + ".");
         }
         catch (Exception e) {
