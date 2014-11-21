@@ -204,6 +204,12 @@ Wake-On-Lan
 contains Java code from [http://www.jibble.org/wake-on-lan/](http://www.jibble.org/wake-on-lan/)
 to send the necessary UDP packet to wake up a machine from sleep.
 
+`alert`
+-------
+
+- [`alert`](https://github.com/jloughry/experiments/tree/master/alert/#readme)
+is a command line utility to pop up a notice box from Cygwin under Windows.
+
 TODO
 ----
 
