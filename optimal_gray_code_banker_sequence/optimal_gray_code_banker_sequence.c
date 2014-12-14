@@ -231,9 +231,7 @@ int main (int argc, char * argv[]) {
 		root_of_tree->next[3]->next[2] = create_node("1100");
 		root_of_tree->next[3]->next[3] = NULL;
 
-
-
-	root_of_tree->next[4] = NULL;
+	root_of_tree->next[n] = NULL;
 	printf("rank 1 nodes created and hooked up\n");
 
 	/* (2) */
