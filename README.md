@@ -210,6 +210,13 @@ to send the necessary UDP packet to wake up a machine from sleep.
 - [`alert`](https://github.com/jloughry/experiments/tree/master/alert/#readme)
 is a command line utility to pop up a notice box from Cygwin under Windows.
 
+`Xcode`
+-------
+
+- [`Do Not Shutdown`](https://github.com/jloughry/experiments/tree/master/Xcode/#readme)
+is a utility to prevent user temporarily from shutting down or rebooting
+the system; for Mac OS X.
+
 TODO
 ----
 
