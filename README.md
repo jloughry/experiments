@@ -127,6 +127,8 @@ highlighter to get at their contents.
 using a pair of stacks, the second demo problem from [interviewcake.com](http://interviewcake.com)).
 - [`wikipedia_article_parser`](https://github.com/jloughry/experiments/tree/master/C_kata/wikipedia_article_parser/)
 *from the Wikipedia article "Recursive_descent_parser"*
+- [`factorial`](https://github.com/jloughry/experiments/tree/master/C_kata/factorial/)
+*just a little warmup: visually indicate recursion depth*
 
 All of these are working and reasonably complete; all memory allocated is freed, and
 no global variables are used. The code is fairly functional in design. Things are mostly
