@@ -125,6 +125,8 @@ highlighter to get at their contents.
 - [`stack`](https://github.com/jloughry/experiments/tree/master/C_kata/stack/)
 *an extensible stack implementation using linked lists* (also implements a queue
 using a pair of stacks, the second demo problem from [interviewcake.com](http://interviewcake.com)).
+- [`string_reverse`](https://github.com/jloughry/experiments/tree/master/C_kata/string_reverse/)
+*using no library functions, in constant space*
 - [`wikipedia_article_parser`](https://github.com/jloughry/experiments/tree/master/C_kata/wikipedia_article_parser/)
 *from the Wikipedia article "Recursive_descent_parser"*
 - [`factorial`](https://github.com/jloughry/experiments/tree/master/C_kata/factorial/)
