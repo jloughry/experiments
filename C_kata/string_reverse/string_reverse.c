@@ -4,8 +4,9 @@ int main (int argc, char ** argv) {
     char * programme_name = NULL;
     char * s = NULL;
     char * t = NULL;
-    int i = 0;
+    size_t length = 0;
     char * p = NULL;
+    char * q = NULL;
 
     programme_name = argv[0];
 
@@ -25,18 +26,20 @@ int main (int argc, char ** argv) {
             break;
     }
 
-    t = malloc(strlen(s) + 1);
+    length = strlen(s);
+
+    t = malloc(length + 1);
     if (!t) {
         ERROR_EXIT("malloc");
     }
 
     p = s;
-    i = strlen(s);
+    q = t + length;
+    *q-- = '\0';
 
     while (*p) {
-        t[i-- - 1] = *p++;  /* alternatively: t[i---i] but that's evil */
+        *q-- = *p++;
     }
-    t[strlen(s)] = '\0';    /* repeatedly calculating strlen(s) is neither thread safe nor efficient */
 
     printf ("s = \"%s\"\n", s);
     printf ("t = \"%s\"\n", t);

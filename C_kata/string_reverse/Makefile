@@ -21,8 +21,8 @@ test: $(executable)
 	./$< 1
 	./$< -1
 	./$< hello
-	./$< "abcdefghi jklmnopqr stuvwxyz"
-	-./$< abcdefghi jklmnopqr stuvwxyz
+	./$< "abcdefghi jklmnopqr stuvwxyz-"
+	-./$< abcdefghi jklmnopqr stuvwxyz-
 	-./$<
 	./$< 10000000000000000000000000000000000000000000
 	@echo
