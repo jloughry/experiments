@@ -102,6 +102,8 @@ This is a series of *kata* type exercises in C. So far, the working ones are:
 *very simple Bloom filter*
 - [`framework`](https://github.com/jloughry/experiments/tree/master/C_kata/framework/)
 *copy this directory to begin writing a new C programme quickly*
+- [`free_the_wrong_pointer`](https://github.com/jloughry/experiments/tree/master/C_kata/free_the_wrong_pointer/)
+*What happens if you give free() a different value from what malloc() provided? Undefined behaviour (UB).*
 - [`google_docs`](https://github.com/jloughry/experiments/tree/master/C_kata/google_docs/)
 *an experimental implementation of automatically generated unit tests*
 - [`hash`](https://github.com/jloughry/experiments/tree/master/C_kata/hash/)
