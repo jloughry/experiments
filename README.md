@@ -157,6 +157,9 @@ J_kata
 
 This is a series of *kata*-type exercises in Java. So far, they consist of:
 
+- [`eicargen`](https://github.com/jloughry/experiments/tree/master/J_kata/eicargen/)
+*a programme to write a file containing the EICAR standard anti-virus test
+file, after Didier Stevens*
 - [`logic`](https://github.com/jloughry/experiments/tree/master/J_kata/logic/)
 *the difference between programmers and human beings*
 - [`newtons_method`](https://github.com/jloughry/experiments/tree/master/J_kata/newtons_method/)
