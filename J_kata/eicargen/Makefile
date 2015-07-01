@@ -19,7 +19,11 @@ $(executable): $(source) Makefile
 	$(compile) $(cflags) $<
 
 test: $(executable)
-	java $(target)
+	-java $(target)
+	-java $(target) abc
+	-java $(target) abc def
+	-java $(target) 0123 abc def
+	java $(target) write
 	@echo
 	@echo "All tests succeeded."
 
