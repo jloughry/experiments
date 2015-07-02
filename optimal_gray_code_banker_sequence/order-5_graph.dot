@@ -1,0 +1,279 @@
+/*
+    dot -T pdf order5_graph.dot -o order5_graph.pdf
+*/
+
+digraph order5 {
+
+	node [shape=plaintext]
+
+	level_0 [label="(0)"]
+	level_1 [label="(1)"]
+	level_2 [label="(2)"]
+	level_3 [label="(1)"]
+	level_4 [label="(2)"]
+	level_5 [label="(1)"]
+	level_6 [label="(2)"]
+	level_7 [label="(1)"]
+	level_8 [label="(2)"]
+	level_9 [label="(1)"]
+	level_10 [label="(2)"]
+	level_11 [label="(3)"]
+	level_12 [label="(2)"]
+	level_13 [label="(3)"]
+	level_14 [label="(2)"]
+	level_15 [label="(3)"]
+	level_16 [label="(2)"]
+	level_17 [label="(3)"]
+	level_18 [label="(2)"]
+	level_19 [label="(3)"]
+	level_20 [label="(2)"]
+	level_21 [label="(3)"]
+	level_22 [label="(4)"]
+	level_23 [label="(3)"]
+	level_24 [label="(4)"]
+	level_25 [label="(3)"]
+	level_26 [label="(4)"]
+	level_27 [label="(3)"]
+	level_28 [label="(4)"]
+	level_29 [label="(3)"]
+	level_30 [label="(4)"]
+	level_31 [label="(5)"]
+
+	edge [style=invis]
+    level_1 -> level_1 -> level_2 -> level_3 -> level_4 -> level_5 ->
+    level_6 -> level_7 -> level_8 -> level_9 -> level_10 -> level_11 ->
+    level_12 -> level_13 -> level_14 -> level_15 -> level_16 -> level_17 ->
+    level_18 -> level_19 -> level_20 -> level_21 -> level_22 -> level_23 ->
+    level_24 -> level_25 -> level_26 -> level_27 -> level_28 -> level_29 ->
+    level_30 -> level_31
+
+    node [shape=ellipse]
+    edge [style=solid]
+
+    { // there is only one possible node with no bits set
+        rank=same; level_0
+
+        level_0_00000 [label="00000"] // shape=ellipse,fontcolor=red,color=red,style=bold]
+    }
+
+    { // all possible nodes with 1 bit set
+        rank=same; level_1
+
+        level_1_00001 [label="00001"]
+        level_1_00010 [label="00010"]
+        level_1_00100 [label="00100"]
+        level_1_01000 [label="01000"]
+        level_1_10000 [label="10000"]
+    }
+
+    { // all possible nodes with 1 bit set
+        rank=same; level_3
+
+        level_3_00001 [label="00001"]
+        level_3_00010 [label="00010"]
+        level_3_00100 [label="00100"]
+        level_3_01000 [label="01000"]
+        level_3_10000 [label="10000"]
+    }
+
+    { // all possible nodes with 1 bit set
+        rank=same; level_4
+
+        level_4_00001 [label="00001"]
+        level_4_00010 [label="00010"]
+        level_4_00100 [label="00100"]
+        level_4_01000 [label="01000"]
+        level_4_10000 [label="10000"]
+    }
+
+    { // all possible nodes with 2 bits set
+        rank=same; level_2
+
+        level_2_00011 [label="00011"]
+        level_2_00110 [label="00110"]
+        level_2_01100 [label="01100"]
+        level_2_11000 [label="11000"]
+        level_2_00101 [label="00101"]
+        level_2_01010 [label="01010"]
+        level_2_10100 [label="10100"]
+        level_2_01001 [label="01001"]
+        level_2_10010 [label="10010"]
+        level_2_10001 [label="10001"]
+    }
+
+    { // all possible nodes with 2 bits set
+        rank=same; level_5
+
+        level_5_00011 [label="00011"]
+        level_5_00110 [label="00110"]
+        level_5_01100 [label="01100"]
+        level_5_11000 [label="11000"]
+        level_5_00101 [label="00101"]
+        level_5_01010 [label="01010"]
+        level_5_10100 [label="10100"]
+        level_5_01001 [label="01001"]
+        level_5_10010 [label="10010"]
+        level_5_10001 [label="10001"]
+    }
+
+/*
+    { // all possible nodes with 3 bits set
+        rank=same; level_x
+
+        n3_00111 [label="00111"]
+        n3_01110 [label="01110"]
+        n3_11100 [label="11100"]
+        n3_01011 [label="01011"]
+        n3_11010 [label="11010"]
+        n3_11010 [label="11010"]
+        n3_10101 [label="10101"]
+        n3_10011 [label="10011"]
+        n3_11001 [label="11001"]
+        n3_10110 [label="10110"]
+    }
+
+    { // all possible nodes with 4 bits set
+        rank=same; level_y
+
+        n4_11110 [label="11110"]
+        n4_11101 [label="11101"]
+        n4_11011 [label="11011"]
+        n4_10111 [label="10111"]
+        n4_01111 [label="01111"]
+    }
+
+*/
+
+    { // there is only one possible node with 5 bits set
+        rank=same; level_31
+
+        n5_11111 [label="11111"]
+    }
+
+    // allowable transitions from (0) -> (1) out of level 0
+
+    level_0_00000 -> level_1_00001 // [color=red,style=bold]
+    level_0_00000 -> level_1_00010
+    level_0_00000 -> level_1_00100
+    level_0_00000 -> level_1_01000
+    level_0_00000 -> level_1_10000
+
+    // allowable transitions from (1) -> (2) out of level 1
+
+    level_1_00001 -> level_2_00011
+    level_1_00001 -> level_2_00101
+    level_1_00001 -> level_2_01001
+    level_1_00001 -> level_2_10001
+
+    level_1_00010 -> level_2_00011
+    level_1_00010 -> level_2_00110
+    level_1_00010 -> level_2_01010
+    level_1_00010 -> level_2_10010
+
+    level_1_00100 -> level_2_00101
+    level_1_00100 -> level_2_00110
+    level_1_00100 -> level_2_01100
+    level_1_00100 -> level_2_10100
+
+    level_1_01000 -> level_2_01001
+    level_1_01000 -> level_2_01010
+    level_1_01000 -> level_2_01100
+    level_1_01000 -> level_2_11000
+
+    level_1_10000 -> level_2_10001
+    level_1_10000 -> level_2_10010
+    level_1_10000 -> level_2_10100
+    level_1_10000 -> level_2_11000
+
+    // allowable transitions from (2) -> (1) out of level 2
+
+    level_2_00011 -> level_3_00010
+    level_2_00011 -> level_3_00001
+
+    level_2_00110 -> level_3_00100
+    level_2_00110 -> level_3_00010
+
+    level_2_01100 -> level_3_01000
+    level_2_01100 -> level_3_00100
+
+    level_2_11000 -> level_3_10000
+    level_2_11000 -> level_3_01000
+
+    level_2_00101 -> level_3_00100
+    level_2_00101 -> level_3_00001
+
+    level_2_01010 -> level_3_01000
+    level_2_01010 -> level_3_00010
+
+    level_2_10100 -> level_3_10000
+    level_2_10100 -> level_3_00100
+
+    level_2_01001 -> level_3_01000
+    level_2_01001 -> level_3_00001
+
+    level_2_10010 -> level_3_10000
+    level_2_10010 -> level_3_00010
+
+    level_2_10001 -> level_3_10000
+    level_2_10001 -> level_3_00001
+
+    // allowable transitions from (1) to (2) out of level 3
+
+    level_3_00001 -> level_4_00011
+    level_3_00001 -> level_4_00101
+    level_3_00001 -> level_4_01001
+    level_3_00001 -> level_4_10001
+
+    level_3_00010 -> level_4_00011
+    level_3_00010 -> level_4_00110
+    level_3_00010 -> level_4_01010
+    level_3_00010 -> level_4_10010
+
+    level_3_00100 -> level_4_00101
+    level_3_00100 -> level_4_00110
+    level_3_00100 -> level_4_01100
+    level_3_00100 -> level_4_10100
+
+    level_3_01000 -> level_4_01001
+    level_3_01000 -> level_4_01010
+    level_3_01000 -> level_4_01100
+    level_3_01000 -> level_4_11000
+
+    level_3_10000 -> level_4_10001
+    level_3_10000 -> level_4_10010
+    level_3_10000 -> level_4_10100
+    level_3_10000 -> level_4_11000
+
+    // allowable transitions from (2) to (1) out of level 4
+
+    level_4_00011 -> level_5_00010
+    level_4_00011 -> level_5_00001
+
+    level_4_00110 -> level_5_00100
+    level_4_00110 -> level_5_00010
+
+    level_4_01100 -> level_5_01000
+    level_4_01100 -> level_5_00100
+
+    level_4_11000 -> level_5_10000
+    level_4_11000 -> level_5_01000
+
+    level_4_00101 -> level_5_00100
+    level_4_00101 -> level_5_00001
+
+    level_4_01010 -> level_5_01000
+    level_4_01010 -> level_5_00010
+
+    level_4_10100 -> level_5_10000
+    level_4_10100 -> level_5_00100
+
+    level_4_01001 -> level_5_01000
+    level_4_01001 -> level_5_00001
+
+    level_4_10010 -> level_5_10000
+    level_4_10010 -> level_5_00010
+
+    level_4_10001 -> level_5_10000
+    level_4_10001 -> level_5_00001
+}
+
