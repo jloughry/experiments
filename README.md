@@ -32,6 +32,9 @@ Optimal-Gray-Code-Banker-Sequence
 A program by which is found, by exhaustive search, whether an optimal Gray code banker's sequence
 exists for a given *n*.
 
+The file `order_5.txt` will be a PIC description containing an optimal
+order-5 tree.
+
 make_behaviour_on_symlinks
 --------------------------
 

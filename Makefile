@@ -1,6 +1,6 @@
-target = html_in_scheme
+target = Makefile
 
-source = $(target).scm
+source = $(target)
 
 all::
 	@echo "There is nothing to build here."
