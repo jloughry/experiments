@@ -615,6 +615,124 @@ digraph order5 {
     level_5_10000 -> level_6_10100
     level_5_10000 -> level_6_11000
 
+    // allowable transitions from (2) to (1) out of level 6
+
+    level_6_00011 -> level_7_00010
+    level_6_00011 -> level_7_00001
+
+    level_6_00110 -> level_7_00100
+    level_6_00110 -> level_7_00010
+
+    level_6_01100 -> level_7_01000
+    level_6_01100 -> level_7_00100
+
+    level_6_11000 -> level_7_10000
+    level_6_11000 -> level_7_01000
+
+    level_6_00101 -> level_7_00100
+    level_6_00101 -> level_7_00001
+
+    level_6_01010 -> level_7_01000
+    level_6_01010 -> level_7_00010
+
+    level_6_10100 -> level_7_10000
+    level_6_10100 -> level_7_00100
+
+    level_6_01001 -> level_7_01000
+    level_6_01001 -> level_7_00001
+
+    level_6_10010 -> level_7_10000
+    level_6_10010 -> level_7_00010
+
+    level_6_10001 -> level_7_10000
+    level_6_10001 -> level_7_00001
+
+    // allowable transitions from (1) to (2) out of level 7
+
+    level_7_00001 -> level_8_00011
+    level_7_00001 -> level_8_00101
+    level_7_00001 -> level_8_01001
+    level_7_00001 -> level_8_10001
+
+    level_7_00010 -> level_8_00011
+    level_7_00010 -> level_8_00110
+    level_7_00010 -> level_8_01010
+    level_7_00010 -> level_8_10010
+
+    level_7_00100 -> level_8_00101
+    level_7_00100 -> level_8_00110
+    level_7_00100 -> level_8_01100
+    level_7_00100 -> level_8_10100
+
+    level_7_01000 -> level_8_01001
+    level_7_01000 -> level_8_01010
+    level_7_01000 -> level_8_01100
+    level_7_01000 -> level_8_11000
+
+    level_7_10000 -> level_8_10001
+    level_7_10000 -> level_8_10010
+    level_7_10000 -> level_8_10100
+    level_7_10000 -> level_8_11000
+
+    // allowable transitions from (2) to (1) out of level 8
+
+    level_8_00011 -> level_9_00010
+    level_8_00011 -> level_9_00001
+
+    level_8_00110 -> level_9_00100
+    level_8_00110 -> level_9_00010
+
+    level_8_01100 -> level_9_01000
+    level_8_01100 -> level_9_00100
+
+    level_8_11000 -> level_9_10000
+    level_8_11000 -> level_9_01000
+
+    level_8_00101 -> level_9_00100
+    level_8_00101 -> level_9_00001
+
+    level_8_01010 -> level_9_01000
+    level_8_01010 -> level_9_00010
+
+    level_8_10100 -> level_9_10000
+    level_8_10100 -> level_9_00100
+
+    level_8_01001 -> level_9_01000
+    level_8_01001 -> level_9_00001
+
+    level_8_10010 -> level_9_10000
+    level_8_10010 -> level_9_00010
+
+    level_8_10001 -> level_9_10000
+    level_8_10001 -> level_9_00001
+
+    // allowable transitions from (1) to (2) out of level 9
+
+    level_9_00001 -> level_10_00011
+    level_9_00001 -> level_10_00101
+    level_9_00001 -> level_10_01001
+    level_9_00001 -> level_10_10001
+
+    level_9_00010 -> level_10_00011
+    level_9_00010 -> level_10_00110
+    level_9_00010 -> level_10_01010
+    level_9_00010 -> level_10_10010
+
+    level_9_00100 -> level_10_00101
+    level_9_00100 -> level_10_00110
+    level_9_00100 -> level_10_01100
+    level_9_00100 -> level_10_10100
+
+    level_9_01000 -> level_10_01001
+    level_9_01000 -> level_10_01010
+    level_9_01000 -> level_10_01100
+    level_9_01000 -> level_10_11000
+
+    level_9_10000 -> level_10_10001
+    level_9_10000 -> level_10_10010
+    level_9_10000 -> level_10_10100
+    level_9_10000 -> level_10_11000
+
     // allowable transitions from (4) to (5) out of level 30
 
     level_30_01111 -> level_31_11111

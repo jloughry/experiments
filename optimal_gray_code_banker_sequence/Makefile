@@ -1,5 +1,7 @@
 target = optimal_gray_code_banker_sequence
 
+chart = order-5_graph.dot
+
 rm = rm -f
 cc = cc -Wall
 edit = vi
@@ -17,7 +19,10 @@ test: $(target)
 	./$(target) 5
 
 vi:
-	$(edit) $(target).c
+	$(edit) $(chart)
+
+chart:
+	dot -T pdf $(chart) -o order-5_graph.pdf
 
 notes:
 	(cd ../../notes && make vi)
