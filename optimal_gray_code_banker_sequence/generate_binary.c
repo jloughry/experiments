@@ -3,7 +3,7 @@
 #include <string.h>
 
 char * binary (int n, int m);
-void blank_line(void);
+void blank_line (void);
 
 int main (int argc, char ** argv) {
     int n = 0;
@@ -23,83 +23,117 @@ int main (int argc, char ** argv) {
     printf ("    dot -T pdf order-%d_graph_generated.dot -o order-%d_graph_generated.pdf\n",
         n, n);
     printf ("*/\n");
-    blank_line();
+    blank_line ();
     printf ("digraph order%d {\n", n);
-    blank_line();
+    blank_line ();
     printf ("    node [shape=plaintext]\n");
-    blank_line();
+    blank_line ();
 
     // left side row markers
 
-    for (row = 0; row < (0x1 << n); row++) {
+    for (row = 0; row < (0x1 << n); row ++) {
         printf ("    level_%d [label=\"%d (?)\"]\n", row, row);
     }
 
-    // Connect the left side row markers invisibly.
+    blank_line ();
+    printf ("    /* Connect the left side row markers invisibly so they stay lined up. */\n");
 
-    blank_line();
+    blank_line ();
     printf ("    edge [style=invis]\n");
-    blank_line();
+    blank_line ();
 
     printf ("    level_0");
-    for (row = 0; row < (0x1 << n); row++) {
+    for (row = 0; row < (0x1 << n); row ++) {
         printf (" -> level_%d", row);
 
+        // break long lines
+
         if ((row % 5) == 4) {
-            blank_line();
-            printf("        ");
+            blank_line ();
+            printf ("        ");
         }
     }
 
-    blank_line();
-    blank_line();
+    blank_line ();
+    blank_line ();
     printf ("    graph [ordering=out]\n");
     printf ("    node [shape=rect]\n");
-    blank_line();
+    blank_line ();
 
-    // Set of all possible states
+    printf ("    /* set of all possible states */\n");
+    blank_line ();
 
-    for (row=0; row < (0x1 << n); row++) {
+    for (row=0; row < (0x1 << n); row ++) {
         printf ("    {\n");
         printf ("        rank=same; level_%d\n", row);
-        blank_line();
+        blank_line ();
 
-        for (col=0; col < (0x1 << n); col++) {
+        for (col=0; col < (0x1 << n); col ++) {
             char * p = NULL;
 
-            p = binary(col, n);
+            p = binary (col, n);
 
             printf ("        level_%d_%s [label=\"%s\"]\n", row, p, p);
-            free(p);
+            free (p);
         }
         printf ("    }\n");
-        blank_line();
+        blank_line ();
     }
 
-    // Connect the states invisibly so they stay lined up vertically.
+    printf ("    edge [style=invis]\n");
 
-    for (col=0; col < (0x1 << n); col++) {
-        blank_line();
+    blank_line ();
+    printf ("    /* Connect the states invisibly so they stay lined up vertically. */\n");
 
-        for (row=0; row < ((0x1 << n) - 1); row++) {
+    for (col=0; col < (0x1 << n); col ++) {
+        blank_line ();
+
+        for (row = 0; row < ((0x1 << n) - 1); row ++) {
             char * p = NULL;
 
-            p = binary(col, n);
-
+            p = binary (col, n);
             printf ("    level_%d_%s -> level_%d_%s\n", row, p, row + 1, p);
-            free(p);
+            free (p);
         }
+    }
+
+    blank_line ();
+    printf ("    /* Connect the states invisibly so they stay lined up horizontally. */\n");
+
+    for (row = 0; row < (0x1 << n); row ++) {
+        char * p = NULL;
+
+        blank_line ();
+        p = binary (0, n);
+        printf ("    level_%d_%s", row, p);
+        free (p);
+
+        for (col = 1; col < (0x1 << n); col ++) {
+            char * p = NULL;
+
+            p = binary (col, n);
+            printf (" -> level_%d_%s", row, p);
+            free (p);
+
+            // break long lines
+
+            if ((col % 5) == 4) {
+                printf ("\n    ");
+            }
+        }
+        blank_line ();
     }
 
     // Now generate the graph of allowable transitions.
 
-    blank_line();
-    printf ("    edge [style=solid,arrowhead=none]\n");
+    blank_line ();
+    printf ("    edge [style=solid,color=black,arrowhead=none]\n");
+    blank_line ();
 
     // End of DOT source file.
 
     printf ("}\n");
-    blank_line();
+    blank_line ();
 
     return EXIT_SUCCESS;
 }
@@ -108,7 +142,7 @@ char * binary (int n, int m) {
     int i = 0;
     char * s = NULL;
 
-    s = malloc(m+1);
+    s = malloc (m+1);
     if (!s) {
         fprintf (stderr, "malloc() failed\n");
         exit (EXIT_FAILURE);
