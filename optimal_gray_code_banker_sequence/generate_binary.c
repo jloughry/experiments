@@ -127,7 +127,7 @@ int main (int argc, char ** argv) {
     // Now generate the graph of allowable transitions.
 
     blank_line ();
-    printf ("    edge [style=solid,color=black,arrowhead=none]\n");
+    printf ("    edge [style=solid,color=black]\n");
     blank_line ();
 
     // End of DOT source file.
