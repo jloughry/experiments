@@ -102,6 +102,8 @@ This is a series of *kata* type exercises in C. So far, the working ones are:
 *an implementation of a binary search tree*
 - [`bloom_filter`](https://github.com/jloughry/experiments/tree/master/C_kata/bloom_filter/)
 *very simple Bloom filter*
+- [`floats_are_evil`](https://githib.com/jloughry/experiments/tree/master/C_kata/floats_are_evil/)
+*testing some code from HN*
 - [`framework`](https://github.com/jloughry/experiments/tree/master/C_kata/framework/)
 *copy this directory to begin writing a new C programme quickly*
 - [`free_the_wrong_pointer`](https://github.com/jloughry/experiments/tree/master/C_kata/free_the_wrong_pointer/)
@@ -114,6 +116,8 @@ This is a series of *kata* type exercises in C. So far, the working ones are:
 *the &ldquo;Apple Stock Prices&rdquo; problem from [interviewcake.com](http://interviewcake.com).
 - [`mergesort`](https://github.com/jloughry/experiments/tree/master/C_kata/mergesort/)
 *merge sort*
+- [`ppm`](https://github.com/jloughry/experiments/tree/master/C_kata/ppm/)
+*from HN, programme to generate red--green gradient in NetPPM graphics file format*
 - [`shellsort`](https://github.com/jloughry/experiments/tree/master/C_kata/shellsort/)
 *Shell sort*
 - [`rdp`](https://github.com/jloughry/experiments/tree/master/C_kata/rdp/)
