@@ -39,10 +39,10 @@ $(pdf_file): $(chart_source)
 	dot -T pdf $(chart_source) -o $(pdf_file)
 
 notes:
-	(cd ../../notes && make vi)
+	(cd ../../notes.new && make vi)
 
 quotes:
-	(cd ../../notes && make quotes)
+	(cd ../../notes.new && make quotes)
 
 bibtex:
 	(cd ../../bibtex && make vi)
